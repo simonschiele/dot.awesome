@@ -203,20 +203,25 @@ for s = 1, screen.count() do
 end
 -- }}}
 
--- {{{ Mouse bindings
-root.buttons(awful.util.table.join(
-    awful.button({ }, 3, function () mymainmenu:toggle() end),
-    awful.button({ }, 4, awful.tag.viewnext),
-    awful.button({ }, 5, awful.tag.viewprev)
-))
--- }}}
-
 -- {{{ Key bindings
 globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "Left",   awful.tag.viewprev       ),
     awful.key({ modkey,           }, "Right",  awful.tag.viewnext       ),
     awful.key({ modkey,           }, "Escape", awful.tag.history.restore),
 
+    -- client focus
+    awful.key({ altkey,           }, "Tab",
+        function ()
+            awful.client.focus.history.previous()
+            if client.focus then
+                client.focus:raise()
+            end
+        end),
+    awful.key({ modkey,           }, "Tab",
+        function ()
+            awful.client.focus.byidx( 1)
+            if client.focus then client.focus:raise() end
+        end),
     awful.key({ modkey,           }, "j",
         function ()
             awful.client.focus.byidx( 1)
@@ -234,19 +239,13 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Control" }, "j", function () awful.screen.focus_relative( 1) end),
     awful.key({ modkey, "Control" }, "k", function () awful.screen.focus_relative(-1) end),
     awful.key({ modkey,           }, "u", awful.client.urgent.jumpto),
-    awful.key({ modkey,           }, "Tab",
-        function ()
-            awful.client.focus.history.previous()
-            if client.focus then
-                client.focus:raise()
-            end
-        end),
 
-    -- Standard program
-    awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
+    -- Quit/Restart/Redraw Awesome
     awful.key({ modkey, "Control" }, "r", awesome.restart),
     awful.key({ modkey, "Control" }, "q", awesome.quit),
+    awful.key({ modkey, "Shift"   }, "r", function (c) c:redraw() end),
 
+    -- Standard program
     awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact( 0.05)    end),
     awful.key({ modkey,           }, "h",     function () awful.tag.incmwfact(-0.05)    end),
     awful.key({ modkey, "Shift"   }, "h",     function () awful.tag.incnmaster( 1)      end),
@@ -258,8 +257,10 @@ globalkeys = awful.util.table.join(
 
     awful.key({ modkey, "Control" }, "n", awful.client.restore),
 
-    -- Prompt
+    -- Prompt / Exec Applications
+    awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
     awful.key({ modkey },            "r",     function () mypromptbox[mouse.screen]:run() end),
+    awful.key({ modkey },            "e",     function () mypromptbox[mouse.screen]:run() end),
     
     awful.key({ modkey }, "F12", function () awful.util.spawn(screen_lock) end),
 
@@ -273,20 +274,13 @@ globalkeys = awful.util.table.join(
 )
 
 clientkeys = awful.util.table.join(
-    awful.key({ modkey,           }, "f",      function (c) c.fullscreen = not c.fullscreen  end),
-    awful.key({ modkey, "Shift"   }, "c",      function (c) c:kill()                         end),
+    awful.key({ modkey,    }, "f", function (c) c.fullscreen = not c.fullscreen end),
+    awful.key({ modkey,    }, "x", function (c) c:kill() end),
     awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle                     ),
-    awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end),
     awful.key({ modkey,           }, "o",      awful.client.movetoscreen                        ),
-    awful.key({ modkey, "Shift"   }, "r",      function (c) c:redraw()                       end),
     awful.key({ modkey,           }, "t",      function (c) c.ontop = not c.ontop            end),
-    awful.key({ modkey,           }, "n",
-        function (c)
-            -- The client currently has the input focus, so it cannot be
-            -- minimized, since minimized clients can't have the focus.
-            c.minimized = true
-        end),
-    awful.key({ modkey,           }, "m",
+    awful.key({ modkey,     }, "n", function (c) c.minimized = true end),
+    awful.key({ modkey,     }, "m",
         function (c)
             c.maximized_horizontal = not c.maximized_horizontal
             c.maximized_vertical   = not c.maximized_vertical
@@ -335,10 +329,20 @@ end
 clientbuttons = awful.util.table.join(
     awful.button({ }, 1, function (c) client.focus = c; c:raise() end),
     awful.button({ modkey }, 1, awful.mouse.client.move),
-    awful.button({ modkey }, 3, awful.mouse.client.resize))
+    awful.button({ altkey }, 1, awful.mouse.client.move),
+    awful.button({ modkey }, 3, awful.mouse.client.resize),
+    awful.button({ altkey }, 3, awful.mouse.client.resize))
 
 -- Set keys
 root.keys(globalkeys)
+-- }}}
+
+-- {{{ Mouse bindings
+root.buttons(awful.util.table.join(
+    awful.button({ }, 3, function () mymainmenu:toggle() end),
+    awful.button({ }, 4, awful.tag.viewnext),
+    awful.button({ }, 5, awful.tag.viewprev)
+))
 -- }}}
 
 -- {{{ Rules
@@ -363,15 +367,15 @@ joinTables(awful.rules.rules,{
 -- {{{ Signals
 -- Signal function to execute when a new client appears.
 client.add_signal("manage", function (c, startup)
-    if application_config[c.pid] ~= nil then
-        print("now")
-        if application_config[c.pid].screen ~= nil then
-            c.screen = application_config[c.pid].screen
-        end
-        if application_config[c.pid].tag ~= nil then
-            c:tags({ screen[c.screen]:tags()[application_config[c.pid].tag] })
-        end
-    end
+    -- if application_config[c.pid] ~= nil then
+    --    print("now")
+    --    if application_config[c.pid].screen ~= nil then
+    --        c.screen = application_config[c.pid].screen
+    --    end
+    --    if application_config[c.pid].tag ~= nil then
+    --        c:tags({ screen[c.screen]:tags()[application_config[c.pid].tag] })
+    --    end
+    -- end
     
     if config['titlebar'] then
         awful.titlebar.add(c, { modkey = modkey })
