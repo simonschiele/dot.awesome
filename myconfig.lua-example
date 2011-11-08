@@ -56,7 +56,7 @@
 -- autostart_config['xclock'] = {cmd = "xclock", shell = false, screen = 1, tag = 2}
 -- autostart_config['xcalc'] = {cmd = "xcalc", shell = false, screen = 1, tag = 2}
 
---- Application rule stuff - Same as autostart, but for every application raise.
+--- Application rule stuff - for every application raise.
 -- awful.rules.rules = {
 --    { rule = { class = "Pidgin" },
 --      properties = { floating = true } },
