@@ -1,0 +1,66 @@
+
+--- Modkey is your main modifier key. you get ~50 keybindings. 
+--- it's wise to use the window(s) (Mod4) key for most stuff
+-- config['modkey'] = "Mod4" 
+
+--- Mod1 == Alt Key - only used optional for window handling and app switching
+-- config['altkey'] = "Mod1" 
+
+--- Screen for systray and widgets 
+-- config['main_screen'] = 2
+
+--- If this computer is a laptop, this switch will optimize awesome a littlebit (bat & wlan widget,...) 
+-- config['laptop'] = true
+
+--- optimize for small screens like on netbooks
+-- config['small_screen'] = true
+
+--- Make a seperate taskbar. I prefer to have my open applications at the bottom of the screen
+-- config['taskbar'] = 'bottom'         -- simple taskbar at the bottom ('simons default')
+-- config['taskbar'] = 'top'            -- taskbar inside top bar ('awesome default')
+-- config['taskbar'] = 'off' | false    -- no tasklist at all
+
+--- If not set, Tags are named by number. If one of the Options gets used, 
+--- you will have fancy unicode signs as Tag Names
+-- config['tag_style'] = 'fancy'  
+-- config['tag_style'] = 'greek'
+
+--- Enable widget-sets
+-- config['vicious'] = true 
+-- config['obvious'] = true 
+
+--- Enable awesompd
+-- config['awesompd'] = true 
+-- config['awesompd_hosts'] = {
+--    { server = "localhost",port = 6600 },
+--    { server = "wohnzimmer",port = 6600 },
+--    { server = "schlafzimmer",port = 6600 },
+--    { server = "kueche",port = 6600 },
+--    { server = "allrooms",port = 6600 },
+-- }
+
+--- Settings for alsamixer
+-- config['alsa_device'] = 0
+-- config['alsa_mixer'] = "Master"
+
+--- Devices for network widgets
+-- config['device_wired'] = 'eth0'
+-- config['device_wireless'] = 'wlan0'
+
+--- Choose a different theme (best use only themes delivered with this repo. if not, check if the widget colors are available) 
+-- config['theme'] = "default"
+
+--- Application Autostart
+--- Rules to autostart applications. You can define shell, screen, tag, sudo and kill_running.
+-- autostart_config['xterm'] = {cmd = "xterm", shell = false, screen = 1, tag = 2, kill_running = false, }
+-- autostart_config['xclock'] = {cmd = "xclock", shell = false, screen = 1, tag = 2}
+-- autostart_config['xcalc'] = {cmd = "xcalc", shell = false, screen = 1, tag = 2}
+
+--- Application rule stuff - Same as autostart, but for every application raise.
+-- awful.rules.rules = {
+--    { rule = { class = "Pidgin" },
+--      properties = { floating = true } },
+--    { rule = { class = "Gmpc" },
+--      properties = { floating = true } },
+-- }
+

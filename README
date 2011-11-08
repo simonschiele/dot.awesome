@@ -1,0 +1,40 @@
+
+This is our little awesome config. If you want to use it regulary and be able to update from repo,
+you have to create your own myconfig.lua and maybe you want to put applications.lua in gitignore.
+
+you are welcome to use and improve this config set. send patches to simon.codingmonkey@googlemail.com.
+
+Available clone Paths:
+    git://simon.psaux.de/awesome.git
+    http://simon.psaux.de/git/awesome.git
+    ssh://git@psaux.de/awesome.git
+
+Included subrepos:
+    * obvious
+    * vicious
+    * awesompd 
+
+Steps to get this config running:
+    
+    # Go in your config dir and move away old awesome-config:
+    cd ~/.config/
+    mv awesome/ awesome-old/
+    
+    # Clone Repo (see 'clone paths' above):
+    git clone <clone-path>
+    cd awesome/
+    
+    # Checkout the submodules
+    git submodule init
+    git submodule update
+    git submodule foreach "git checkout master"
+    
+    # Make a copy of myconfig.lua and edit to your needs:
+    cp myconfig.lua-example myconfig.lua
+    vim myconfig.lua
+
+    # To later update repos just do these two steps:
+    cd ~/.config/awesome/
+    git pull
+    git submodule foreach 'git pull'
+
