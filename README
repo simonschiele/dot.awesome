@@ -38,3 +38,35 @@ Steps to get this config running:
     git pull
     git submodule foreach 'git pull'
 
+
+My Default Keysetting:
+    
+    Mouse Btn 1 + Win/Alt       - Move window
+    Mouse Btn 3 + Win/Alt       - Resize window
+
+    Win + n                     - Minimize window
+    Win + m                     - Maximize window
+    Win + f                     - Set window Fullscreen
+    Win + control + space       - Set window Floating
+    Alt + Tab                   - Switch to next window on screen
+    Win + Tab                   - Switch to last active window
+
+    Win + ( Shift + ) Space     - next/(last) layout
+    Win + 1-9                   - Switch to Tag 1-9
+    Win + left/right            - Switch to next/prev Tag
+    Win + Esc                   - Switch to last used Tag
+    Win + Shift + 1-9           - Move window to Tag 1-6
+    Win + a                     - Move Cursor (and focus) to next screen
+    Win + o                     - Move window to next screen
+    Win + Shift + h/l           - Switch "sublayout" of layout
+
+    Win + Enter                 - Terminal
+    Win + F1                    - run lua code 
+    Win + F12                   - lock screen
+    Win + e                     - execute cmd 
+    Win + s                     - ssh session 
+
+    Win + Shift + r             - redraw awesome
+    Win + Control + r           - restart awesome
+    Win + Control + q           - quit awesome (back to dm/shell)
+
