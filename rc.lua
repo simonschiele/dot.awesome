@@ -367,15 +367,15 @@ joinTables(awful.rules.rules,{
 -- {{{ Signals
 -- Signal function to execute when a new client appears.
 client.add_signal("manage", function (c, startup)
-    -- if application_config[c.pid] ~= nil then
-    --    print("now")
-    --    if application_config[c.pid].screen ~= nil then
-    --        c.screen = application_config[c.pid].screen
-    --    end
-    --    if application_config[c.pid].tag ~= nil then
-    --        c:tags({ screen[c.screen]:tags()[application_config[c.pid].tag] })
-    --    end
-    -- end
+    if application_config[c.pid] ~= nil then
+        print("now")
+        if application_config[c.pid].screen ~= nil then
+            c.screen = application_config[c.pid].screen
+        end
+        if application_config[c.pid].tag ~= nil then
+            c:tags({ screen[c.screen]:tags()[application_config[c.pid].tag] })
+        end
+    end
     
     if config['titlebar'] then
         awful.titlebar.add(c, { modkey = modkey })
@@ -409,7 +409,7 @@ client.add_signal("unfocus", function(c) c.border_color = beautiful.border_norma
 -- }}}
 
 -- {{{ Autostart
-if config['autostart'] then
+if autostart_config then
     autostart(autostart_config)
 end
 -- }}}
