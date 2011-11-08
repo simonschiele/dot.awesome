@@ -4,3 +4,12 @@
 [submodule "lib/obvious"]
 	path = lib/obvious
 	url = git://git.mercenariesguild.net/obvious.git
+[submodule "lib/flaw"]
+	path = lib/flaw
+	url = https://github.com/dsoulayrol/flaw.git
+[submodule "lib/bashets"]
+	path = lib/bashets
+	url = git://gitorious.org/bashets/bashets.git
+[submodule "lib/awesompd"]
+	path = lib/awesompd
+	url = https://github.com/alexander-yakushev/awesompd.git
