@@ -16,27 +16,39 @@
 -- config['small_screen'] = true
 
 --- Make a seperate taskbar. I prefer to have my open applications at the bottom of the screen
--- config['taskbar'] = 'bottom'         -- simple taskbar at the bottom ('simons default')
--- config['taskbar'] = 'top'            -- taskbar inside top bar ('awesome default')
--- config['taskbar'] = 'off' | false    -- no tasklist at all
+-- config['taskbar'] = "bottom"         -- simple taskbar at the bottom ('simons default')
+-- config['taskbar'] = "top"            -- taskbar inside top bar ('awesome default')
+-- config['taskbar'] = "off" | false    -- no tasklist at all
+
+--- Choose a different theme (best use only themes delivered with this repo. if not, check if the widget colors are available) 
+-- config['theme'] = "default"
+-- config['theme'] = "zenburn"
+
+--- Set font for menus, tasklist, tagnames, ...
+-- config['font'] = "sans 8"
 
 --- If not set, Tags are named by number. If one of the Options gets used, 
---- you will have fancy unicode signs as Tag Names
--- config['tag_style'] = 'fancy'  
--- config['tag_style'] = 'greek'
+--- you will have fancy unicode signs as Tag Names.
+-- config['tag_style'] = "fancy"  
+-- config['tag_style'] = "greek"
 
---- Enable widget-sets
+--- How many tags per Screen? Only use 1-9.
+-- config['tag_count'] = 7
+
+--- Enable/Disable widget-sets
 -- config['vicious'] = true 
 -- config['obvious'] = true 
+-- config['bashets'] = true 
+-- config['flaw'] = true 
 
 --- Enable awesompd
 -- config['awesompd'] = true 
 -- config['awesompd_hosts'] = {
---    { server = "localhost",port = 6600 },
---    { server = "wohnzimmer",port = 6600 },
---    { server = "schlafzimmer",port = 6600 },
---    { server = "kueche",port = 6600 },
---    { server = "allrooms",port = 6600 },
+--    { server = "localhost", port = 6600 },
+--    { server = "wohnzimmer", port = 6600 },
+--    { server = "schlafzimmer", port = 6600 },
+--    { server = "kueche", port = 6600 },
+--    { server = "allrooms", port = 6600 },
 -- }
 
 --- Settings for alsamixer
@@ -44,11 +56,8 @@
 -- config['alsa_mixer'] = "Master"
 
 --- Devices for network widgets
--- config['device_wired'] = 'eth0'
--- config['device_wireless'] = 'wlan0'
-
---- Choose a different theme (best use only themes delivered with this repo. if not, check if the widget colors are available) 
--- config['theme'] = "default"
+-- config['device_wired'] = "eth0"
+-- config['device_wireless'] = "wlan0"
 
 --- Application Autostart
 --- Rules to autostart applications. You can define shell, screen, tag, sudo and kill_running.
