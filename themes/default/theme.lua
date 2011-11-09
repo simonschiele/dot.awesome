@@ -4,7 +4,11 @@
 
 theme = {}
 
-theme.font          = "sans 8"
+if config['font'] then
+    theme.font          = config['font'] 
+else
+    theme.font          = "sans 8"
+end
 
 theme.bg_normal     = "#222222"
 theme.bg_focus      = "#535d6c"

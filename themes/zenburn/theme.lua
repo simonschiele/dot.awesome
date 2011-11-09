@@ -12,7 +12,11 @@ theme.wallpaper_cmd = { "awsetbg " .. os.getenv("HOME") .. "/.config/awesome/the
 -- }}}
 
 -- {{{ Styles
-theme.font      = "sans 8"
+if config['font'] then
+    theme.font          = config['font'] 
+else
+    theme.font          = "sans 8"
+end
 
 -- {{{ Colors
 theme.fg_normal = "#DCDCCC"
