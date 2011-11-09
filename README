@@ -1,18 +1,21 @@
 
 This is our little awesome config. If you want to use it regulary and be able to update from repo,
-you have to create your own myconfig.lua and maybe you want to put applications.lua in gitignore.
+create your own myconfig.lua (by copying myconfig.lua-example) and maybe you want to put applications.lua in gitignore.
 
-you are welcome to use and improve this config set. send patches to simon.codingmonkey@googlemail.com.
+you are welcome to use and improve this config set. 
+send patches to simon <simon.codingmonkey@googlemail.com>.
 
-Available clone Paths:
+Available clone paths:
     git://simon.psaux.de/awesome.git
     http://simon.psaux.de/git/awesome.git
     ssh://git@psaux.de/awesome.git
 
 Included subrepos:
-    * obvious
-    * vicious
-    * awesompd 
+    * lib/obvious
+    * lib/vicious
+    * lib/flaw
+    * lib/bashets
+    * lib/awesompd 
 
 Steps to get this config running:
     
@@ -43,14 +46,21 @@ My Default Keysetting:
     
     Mouse Btn 1 + Win/Alt       - Move window
     Mouse Btn 3 + Win/Alt       - Resize window
+ 
+    Win + Enter                 - Terminal
+    Win + F2                    - run lua code 
+    Win + F12                   - lock screen
+    Win + e/r                   - execute cmd 
+    Win + s                     - ssh 
 
     Win + n                     - Minimize window
     Win + m                     - Maximize window
     Win + f                     - Set window Fullscreen
     Win + control + space       - Set window Floating
+    Win + j/k                   - Switch to next/prev window on screen
     Alt + Tab                   - Switch to next window on screen
     Win + Tab                   - Switch to last active window
-
+    
     Win + ( Shift + ) Space     - next/(last) layout
     Win + 1-9                   - Switch to Tag 1-9
     Win + left/right            - Switch to next/prev Tag
@@ -59,12 +69,7 @@ My Default Keysetting:
     Win + a                     - Move Cursor (and focus) to next screen
     Win + o                     - Move window to next screen
     Win + Shift + h/l           - Switch "sublayout" of layout
-
-    Win + Enter                 - Terminal
-    Win + F1                    - run lua code 
-    Win + F12                   - lock screen
-    Win + e                     - execute cmd 
-    Win + s                     - ssh session 
+    Win + u                     - Jump to "urgent" (use with mail, IM, irc, ...)
 
     Win + Shift + r             - redraw awesome
     Win + Control + r           - restart awesome
