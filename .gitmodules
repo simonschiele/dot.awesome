@@ -13,6 +13,3 @@
 [submodule "lib/awesompd"]
 	path = lib/awesompd
 	url = https://github.com/alexander-yakushev/awesompd.git
-[submodule "lib/revelation"]
-	path = lib/revelation
-	url = https://bioe007@github.com/bioe007/awesome-revelation.git

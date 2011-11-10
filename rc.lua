@@ -34,7 +34,6 @@ config['main_screen'] = 1
 config['titlebar'] = false 
 config['laptop'] = false
 config['small_screen'] = false
-config['revelation'] = false        -- br0ken 
 
 config['obvious_clock'] = false 
 config['obvious_cpu'] = true 
@@ -118,12 +117,6 @@ separator = widget({ type = "textbox", name = "separator" })
 spacer.text     = " "
 dspacer.text    = "  "
 separator.text  = "|"               -- " syntaxhighlite-fix
--- }}}
-
--- {{{ Revelation
-if config['revelation'] then
-    require("revelation")
-end
 -- }}}
 
 -- {{{ Obvious 
@@ -413,7 +406,6 @@ for i = 1, keynumber do
                           awful.client.toggletag(tags[client.focus.screen][i])
                       end
                   end),
-         config['revelation'] and awful.key({modkey, "Shift"}, "Return", revelation) or nil)
 end
 
 clientbuttons = awful.util.table.join(
