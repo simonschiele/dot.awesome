@@ -1,43 +1,64 @@
+-- path
+config_dir = os.getenv("HOME") .. "/.config/awesome"
+package.path = package.path .. ";" .. config_dir .. "/lib/?/init.lua;" .. config_dir .. "/lib/?;" .. config_dir .. "/lib/?.lua"
+
 -- Standard awesome library
-require("awful")
-require("awful.autofocus")
-require("awful.rules")
+require('awful')
+require('awful.autofocus')
+require('awful.rules')
 
 -- Theme handling library
-require("beautiful")
+require('beautiful')
 
 -- Notification library
-require("naughty")
+require('naughty')
 
 -- Load applications for menu and default variables
-require("applications")
+require('applications')
 
 -- Load lib/tools.lua, a few helper and functions this config needs to work
-require("lib/tools")
+require('tools')
+
 
 -- {{{ Default config & myconfig.lua overwrite loading
+
+-- Don't change config values here!!! Create myconfig.lua and overwrite config there!
+-- Possible config settings are well documented in the myconfig.lua-example
+
 config = {}
 config['theme'] = "zenburn"
-config['tag_style'] = "fancy"
 config['taskbar'] = "bottom" 
 config['modkey'] = "Mod4"
 config['altkey'] = "Mod1"
 config['main_screen'] = 1 
+config['titlebar'] = false 
 config['laptop'] = false
 config['small_screen'] = false
+config['revelation'] = false        -- br0ken 
 
-if exists(os.getenv("HOME") .. "/.config/awesome/myconfig.lua") then
+config['obvious_clock'] = false 
+config['obvious_cpu'] = true 
+config['obvious_ram'] = true 
+config['vicious'] = false
+config['bashets'] = false 
+config['flaw'] = false 
+config['awesompd'] = false
+
+if exists(config_dir .. "/myconfig.lua") then
     application_config = {}
     autostart_config = {}
     require("myconfig")
 end
 
-modkey = config["modkey"]
-altkey = config["altkey"]
+modkey = config['modkey']
+altkey = config['altkey']
 -- }}}
 
 -- {{{ Set Theme
-theme = os.getenv('HOME') .. '/.config/awesome/themes/' .. config['theme'] .. '/theme.lua'
+if not config['theme'] then
+    config['theme'] = "default"
+end
+theme = config_dir .. '/themes/' .. config['theme'] .. '/theme.lua'
 
 if not exists(theme) then
     theme = "/usr/share/awesome/themes/default/theme.lua" 
@@ -69,15 +90,20 @@ layouts =
 -- Define a tag table which hold all screen tags.
 tags = {}
 for s = 1, screen.count() do
-    -- Each screen has its own tag table.
-    -- { "☠", "⌥", "✇", "⌤", "⍜", "✣", "⌨", "⌘", "☕", "☭", "☼", },
     if config['tag_style'] == 'fancy' then
-        tags[s] = awful.tag({"⌨","✇","☭","⌥","⌤","⍜","⌘"}, s)
+        tagnames = {"⚡","✇","☭","⌥","⌤","⍜","⌘","☼","☠"}
     elseif config['tag_style'] == 'greek' then
-        tags[s] = awful.tag({"λ","Ω","Ξ","ε","ϰ","Ϭ","Ψ"}, s)
+        tagnames = {"λ","Ω","Δ","ε","ϰ","Ϭ","Ψ","Φ","ϖ"}
     else
-        tags[s] = awful.tag({"1","2", "3", "4", "5", "6", "7" }, s)
+        tagnames = {"1","2","3","4","5","6","7","8","9"}
     end
+    if not config['tag_count'] then
+        config['tag_count'] = 6 
+    end
+    for i = 0, 8 - config['tag_count'] do
+        table.remove(tagnames)
+    end
+    tags[s] = awful.tag(tagnames, s)
 end
 -- }}}
 
@@ -94,9 +120,62 @@ dspacer.text    = "  "
 separator.text  = "|"               -- " syntaxhighlite-fix
 -- }}}
 
+-- {{{ Revelation
+if config['revelation'] then
+    require("revelation")
+end
+-- }}}
+
+-- {{{ Obvious 
+if config['obvious_clock'] then
+    require('obvious.clock')
+    obvious.clock.set_editor(editor_cmd)
+    obvious.clock.set_shorttimer(1)
+    obvious.clock.set_shortformat(function () return " <b>%X</b>" end)
+    obvious.clock.set_longformat(function () return " <b>%a %b %d, %T </b> " end)
+end
+
+if config['obvious_cpu'] then
+    require('obvious.cpu')
+end
+
+if config['obvious_ram'] then
+    require('obvious.mem')
+end
+
+-- }}}
+
+-- {{{ Vicious 
+if config['vicious'] then
+    require('lib/vicious')
+end
+-- }}}
+
+-- {{{ Bashets 
+if config['bashets'] then
+    require('lib/bashets')
+end
+-- }}}
+
+-- {{{ Flaw
+if config['flaw'] then
+    require('lib/flaw')
+end
+-- }}}
+
+-- {{{ Awesompd
+if config['awesompd'] then
+    require('lib/awesompd')
+end
+-- }}}
+
 -- {{{ Wibox
 -- Create a textclock widget
-textclock = awful.widget.textclock({ align = "right" })
+if config['obvious_clock'] then
+    textclock = obvious.clock()
+else
+    textclock = awful.widget.textclock({ align = "right" })
+end
 
 -- Create a systray
 systray = widget({ type = "systray" })
@@ -183,9 +262,9 @@ for s = 1, screen.count() do
             
             layout = awful.widget.layout.horizontal.leftright
         },
-        
         mylayoutbox[s],
         s == config['main_screen'] and textclock or nil,
+        obvious.cpu(),
         s == config['main_screen'] and systray or nil,
         config['taskbar'] == 'top' and dspacer,
         config['taskbar'] == 'top' and mytasklist[s],
@@ -210,14 +289,14 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "Escape", awful.tag.history.restore),
 
     -- client focus
-    awful.key({ altkey,           }, "Tab",
+    awful.key({ modkey,           }, "Tab",
         function ()
             awful.client.focus.history.previous()
             if client.focus then
                 client.focus:raise()
             end
         end),
-    awful.key({ modkey,           }, "Tab",
+    awful.key({ altkey,           }, "Tab",
         function ()
             awful.client.focus.byidx( 1)
             if client.focus then client.focus:raise() end
@@ -258,24 +337,34 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Control" }, "n", awful.client.restore),
 
     -- Prompt / Exec Applications
-    awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
-    awful.key({ modkey },            "r",     function () mypromptbox[mouse.screen]:run() end),
-    awful.key({ modkey },            "e",     function () mypromptbox[mouse.screen]:run() end),
-    
+    awful.key({ modkey }, "Return", function () awful.util.spawn(terminal) end),
+    awful.key({ modkey }, "r", function () mypromptbox[mouse.screen]:run() end),
+    awful.key({ modkey }, "e", function () mypromptbox[mouse.screen]:run() end),
+    awful.key({ modkey }, "s",
+            function ()
+                awful.prompt.run({ prompt = "SSH: " },
+                mypromptbox[mouse.screen].widget,
+                function (s)
+                    awful.util.spawn(terminal_exec .. "ssh -vvv " .. s)
+                end)
+            end), 
+
+
     awful.key({ modkey }, "F12", function () awful.util.spawn(screen_lock) end),
 
-    awful.key({ modkey }, "F1",
-              function ()
-                  awful.prompt.run({ prompt = "Run Lua code: " },
-                  mypromptbox[mouse.screen].widget,
-                  awful.util.eval, nil,
-                  awful.util.getdir("cache") .. "/history_eval")
-              end)
+    awful.key({ modkey }, "F2",
+            function ()
+                awful.prompt.run({ prompt = "Run Lua code: " },
+                mypromptbox[mouse.screen].widget,
+                awful.util.eval, nil,
+                awful.util.getdir("cache") .. "/history_eval")
+            end)
 )
 
 clientkeys = awful.util.table.join(
     awful.key({ modkey,    }, "f", function (c) c.fullscreen = not c.fullscreen end),
     awful.key({ modkey,    }, "x", function (c) c:kill() end),
+    awful.key({ modkey, "Shift" }, "x", function () awful.util.spawn(xkill) end),
     awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle                     ),
     awful.key({ modkey,           }, "o",      awful.client.movetoscreen                        ),
     awful.key({ modkey,           }, "t",      function (c) c.ontop = not c.ontop            end),
@@ -323,7 +412,8 @@ for i = 1, keynumber do
                       if client.focus and tags[client.focus.screen][i] then
                           awful.client.toggletag(tags[client.focus.screen][i])
                       end
-                  end))
+                  end),
+         config['revelation'] and awful.key({modkey, "Shift"}, "Return", revelation) or nil)
 end
 
 clientbuttons = awful.util.table.join(
@@ -339,7 +429,7 @@ root.keys(globalkeys)
 
 -- {{{ Mouse bindings
 root.buttons(awful.util.table.join(
-    awful.button({ }, 3, function () mymainmenu:toggle() end),
+    awful.button({ }, 3, function () menu:toggle() end),
     awful.button({ }, 4, awful.tag.viewnext),
     awful.button({ }, 5, awful.tag.viewprev)
 ))
@@ -367,15 +457,14 @@ joinTables(awful.rules.rules,{
 -- {{{ Signals
 -- Signal function to execute when a new client appears.
 client.add_signal("manage", function (c, startup)
-    if application_config[c.pid] ~= nil then
-        print("now")
-        if application_config[c.pid].screen ~= nil then
-            c.screen = application_config[c.pid].screen
-        end
-        if application_config[c.pid].tag ~= nil then
-            c:tags({ screen[c.screen]:tags()[application_config[c.pid].tag] })
-        end
-    end
+    -- if application_config[c.pid] ~= nil then
+    --    if application_config[c.pid].screen ~= nil then
+    --        c.screen = application_config[c.pid].screen
+    --    end
+    --    if application_config[c.pid].tag ~= nil then
+    --        c:tags({ screen[c.screen]:tags()[application_config[c.pid].tag] })
+    --    end
+    -- end
     
     if config['titlebar'] then
         awful.titlebar.add(c, { modkey = modkey })
