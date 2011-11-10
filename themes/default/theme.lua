@@ -10,6 +10,10 @@ else
     theme.font          = "sans 8"
 end
 
+if config['tag_font'] then
+    theme.taglist_font = config['tag_font']
+end
+
 theme.bg_normal     = "#222222"
 theme.bg_focus      = "#535d6c"
 theme.bg_urgent     = "#ff0000"

@@ -18,6 +18,11 @@ else
     theme.font          = "sans 8"
 end
 
+if config['tag_font'] then
+    theme.taglist_font = config['tag_font']
+end
+
+
 -- {{{ Colors
 theme.fg_normal = "#DCDCCC"
 theme.fg_focus  = "#F0DFAF"
