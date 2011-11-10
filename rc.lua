@@ -20,32 +20,19 @@ require('applications')
 require('tools')
 
 
--- {{{ Default config & myconfig.lua overwrite loading
+-- {{{ config stuff 
 
 -- Don't change config values here!!! Create myconfig.lua and overwrite config there!
 -- Possible config settings are well documented in the myconfig.lua-example
 
+application_config = {}
+-- autostart_config = {}
 config = {}
-config['theme'] = "zenburn"
-config['taskbar'] = "bottom" 
 config['modkey'] = "Mod4"
 config['altkey'] = "Mod1"
 config['main_screen'] = 1 
-config['titlebar'] = false 
-config['laptop'] = false
-config['small_screen'] = false
-
-config['obvious_clock'] = false 
-config['obvious_cpu'] = true 
-config['obvious_ram'] = true 
-config['vicious'] = false
-config['bashets'] = false 
-config['flaw'] = false 
-config['awesompd'] = false
 
 if exists(config_dir .. "/myconfig.lua") then
-    application_config = {}
-    autostart_config = {}
     require("myconfig")
 end
 
@@ -127,15 +114,6 @@ if config['obvious_clock'] then
     obvious.clock.set_shortformat(function () return " <b>%X</b>" end)
     obvious.clock.set_longformat(function () return " <b>%a %b %d, %T </b> " end)
 end
-
-if config['obvious_cpu'] then
-    require('obvious.cpu')
-end
-
-if config['obvious_ram'] then
-    require('obvious.mem')
-end
-
 -- }}}
 
 -- {{{ Vicious 
@@ -257,10 +235,9 @@ for s = 1, screen.count() do
         },
         mylayoutbox[s],
         s == config['main_screen'] and textclock or nil,
-        obvious.cpu(),
         s == config['main_screen'] and systray or nil,
-        config['taskbar'] == 'top' and dspacer,
-        config['taskbar'] == 'top' and mytasklist[s],
+        config['taskbar'] ~= 'bottom' and config['taskbar'] ~= 'off' and dspacer,
+        config['taskbar'] ~= 'bottom' and config['taskbar'] ~= 'off' and mytasklist[s],
         
         layout = awful.widget.layout.horizontal.rightleft
     }
@@ -308,6 +285,7 @@ globalkeys = awful.util.table.join(
     -- Layout manipulation
     awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1)    end),
     awful.key({ modkey, "Shift"   }, "k", function () awful.client.swap.byidx( -1)    end),
+    awful.key({ modkey,           }, "a", function () awful.screen.focus_relative( 1) end),
     awful.key({ modkey, "Control" }, "j", function () awful.screen.focus_relative( 1) end),
     awful.key({ modkey, "Control" }, "k", function () awful.screen.focus_relative(-1) end),
     awful.key({ modkey,           }, "u", awful.client.urgent.jumpto),
@@ -405,7 +383,7 @@ for i = 1, keynumber do
                       if client.focus and tags[client.focus.screen][i] then
                           awful.client.toggletag(tags[client.focus.screen][i])
                       end
-                  end),
+                  end))
 end
 
 clientbuttons = awful.util.table.join(
@@ -490,7 +468,7 @@ client.add_signal("unfocus", function(c) c.border_color = beautiful.border_norma
 -- }}}
 
 -- {{{ Autostart
-if autostart_config then
+if autostart_config ~= nil then
     autostart(autostart_config)
 end
 -- }}}
