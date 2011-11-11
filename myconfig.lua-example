@@ -35,11 +35,15 @@
 --- How many tags per Screen? Only use 1-9.
 -- config['tag_count'] = 7
 
---- Enable/Disable widget-sets
--- config['vicious'] = true 
--- config['obvious'] = true 
--- config['bashets'] = true 
--- config['flaw'] = true 
+--- Set extra font for tagnames. If not set it is the same as configured/default font.
+-- config['tag_font'] = "sans 8"
+
+--- Enable/Disable widgets
+-- config['vicious_cpu'] = true 
+-- config['vicious_mem'] = true 
+-- config['vicious_bat'] = true 
+-- config['vicious_net'] = true 
+-- config['obvious_clock'] = true 
 
 --- Enable awesompd
 -- config['awesompd'] = true 

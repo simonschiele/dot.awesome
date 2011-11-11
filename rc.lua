@@ -119,81 +119,81 @@ end
 -- }}}
 
 -- {{{ Vicious 
-if config['vicious'] then
+if config['vicious_cpu'] or config['vicious_mem'] or config['vicious_bat'] or config['vicious_net'] then
     require('lib/vicious')
-    
-    if config['vicious_cpu'] then
-        cpuicon = widget({ type = "imagebox", name = "cpuicon" })
-        cpuicon.image = image(beautiful.widget_cpu)
-        cpuwidget = awful.widget.graph()
-        cpuwidget:set_width(50)
-        cpuwidget:set_height(18)
-        cpuwidget:set_background_color("#494B4F")
-        cpuwidget:set_color("#FF5656")
-        cpuwidget:set_gradient_colors({ "#FF5656", "#88A175", "#AECF96" })
-        --  cpuwidget:set_max_value(200)
-        
-        vicious.register(cpuwidget, vicious.widgets.cpu, '$1', 3)
-        table.insert(widgets,dspacer)
-        table.insert(widgets,cpuwidget.widget)
-        table.insert(widgets,cpuicon)
-    end
-            
-    if config['vicious_mem'] then
-        memicon = widget({ type = "imagebox", name = "memicon" })
-        memicon.image = image(beautiful.widget_mem)
-        memwidget = awful.widget.progressbar()
-        memwidget:set_width(8)
-        memwidget:set_height(18)
-        memwidget:set_vertical(true)
-        memwidget:set_background_color('#494B4F')
-        memwidget:set_color('#FF5656')
-        memwidget:set_gradient_colors({ '#FF5656', '#88A175', '#AECF96' })
-        -- vicious.enable_caching(vicious.widgets.mem)
-        
-        vicious.register(memwidget, vicious.widgets.mem, "$1", 13)
-        table.insert(widgets,dspacer)
-        table.insert(widgets,memwidget.widget)
-        table.insert(widgets,memicon)
-    end
-    
-    if config['vicious_bat'] then
-        baticon = widget({ type = "imagebox", name = "baticon" })
-        baticon.image = image(beautiful.widget_bat)
-        batwidget = widget({ type = "textbox", name = "batwidget" })
-        
-        vicious.register(batwidget, vicious.widgets.bat, "$1$2%", 61, "BAT0")
-        table.insert(widgets,dspacer)
-        table.insert(widgets,batwidget)
-        table.insert(widgets,baticon)
-    end
+end   
 
-    if config['vicious_net'] then
-        neticon = widget({ type = "imagebox", name = "neticon" })
-        neticonup = widget({ type = "imagebox", name = "neticonup" })
-        neticon.image = image(beautiful.widget_net)
-        neticonup.image = image(beautiful.widget_netup)
-        netwidget = widget({ type = "textbox", name = "netwidget" })
-        --vicious.enable_caching(vicious.widgets.net)
+if config['vicious_cpu'] then
+    cpuicon = widget({ type = "imagebox", name = "cpuicon" })
+    cpuicon.image = image(beautiful.widget_cpu)
+    cpuwidget = awful.widget.graph()
+    cpuwidget:set_width(50)
+    cpuwidget:set_height(18)
+    cpuwidget:set_background_color("#494B4F")
+    cpuwidget:set_color("#FF5656")
+    cpuwidget:set_gradient_colors({ "#FF5656", "#88A175", "#AECF96" })
+    --  cpuwidget:set_max_value(200)
+    
+    vicious.register(cpuwidget, vicious.widgets.cpu, '$1', 3)
+    table.insert(widgets,dspacer)
+    table.insert(widgets,cpuwidget.widget)
+    table.insert(widgets,cpuicon)
+end
         
-        vicious.register(netwidget, vicious.widgets.net, '<span color="'
-            .. beautiful.fg_netdn_widget ..'">${'.. device_wired ..' down_kb}</span> <span color="'
-            .. beautiful.fg_netup_widget ..'">${'.. device_wired ..' up_kb}</span>', 3)
+if config['vicious_mem'] then
+    memicon = widget({ type = "imagebox", name = "memicon" })
+    memicon.image = image(beautiful.widget_mem)
+    memwidget = awful.widget.progressbar()
+    memwidget:set_width(8)
+    memwidget:set_height(18)
+    memwidget:set_vertical(true)
+    memwidget:set_background_color('#494B4F')
+    memwidget:set_color('#FF5656')
+    memwidget:set_gradient_colors({ '#FF5656', '#88A175', '#AECF96' })
+    -- vicious.enable_caching(vicious.widgets.mem)
+    
+    vicious.register(memwidget, vicious.widgets.mem, "$1", 13)
+    table.insert(widgets,dspacer)
+    table.insert(widgets,memwidget.widget)
+    table.insert(widgets,memicon)
+end
+
+if config['vicious_bat'] then
+    baticon = widget({ type = "imagebox", name = "baticon" })
+    baticon.image = image(beautiful.widget_bat)
+    batwidget = widget({ type = "textbox", name = "batwidget" })
+    
+    vicious.register(batwidget, vicious.widgets.bat, "$1$2%", 61, "BAT0")
+    table.insert(widgets,dspacer)
+    table.insert(widgets,batwidget)
+    table.insert(widgets,baticon)
+end
+
+if config['vicious_net'] then
+    neticon = widget({ type = "imagebox", name = "neticon" })
+    neticonup = widget({ type = "imagebox", name = "neticonup" })
+    neticon.image = image(beautiful.widget_net)
+    neticonup.image = image(beautiful.widget_netup)
+    netwidget = widget({ type = "textbox", name = "netwidget" })
+    --vicious.enable_caching(vicious.widgets.net)
+    
+    vicious.register(netwidget, vicious.widgets.net, '<span color="'
+        .. beautiful.fg_netdn_widget ..'">${'.. device_wired ..' down_kb}</span> <span color="'
+        .. beautiful.fg_netup_widget ..'">${'.. device_wired ..' up_kb}</span>', 3)
+    table.insert(widgets,dspacer) 
+    table.insert(widgets,neticonup) 
+    table.insert(widgets,netwidget) 
+    table.insert(widgets,neticon) 
+    
+    if config['laptop'] then
+        netfiwidget = widget({ type = "textbox", name = "netfiwidget" })
+        vicious.register(netfiwidget, vicious.widgets.net, '<span color="'
+            .. beautiful.fg_netdn_widget ..'">${'..device_wireless ..' down_kb}</span> <span color="'
+            .. beautiful.fg_netup_widget ..'">${'.. device_wireless ..' up_kb}</span>', 3)
         table.insert(widgets,dspacer) 
         table.insert(widgets,neticonup) 
-        table.insert(widgets,netwidget) 
+        table.insert(widgets,netfiwidget) 
         table.insert(widgets,neticon) 
-        
-        if config['laptop'] then
-            netfiwidget = widget({ type = "textbox", name = "netfiwidget" })
-            vicious.register(netfiwidget, vicious.widgets.net, '<span color="'
-                .. beautiful.fg_netdn_widget ..'">${'..device_wireless ..' down_kb}</span> <span color="'
-                .. beautiful.fg_netup_widget ..'">${'.. device_wireless ..' up_kb}</span>', 3)
-            table.insert(widgets,dspacer) 
-            table.insert(widgets,neticonup) 
-            table.insert(widgets,netfiwidget) 
-            table.insert(widgets,neticon) 
-        end
     end
 end
 -- }}}

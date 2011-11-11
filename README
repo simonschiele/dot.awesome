@@ -19,7 +19,6 @@ Included subrepos:
     * lib/flaw (https://github.com/dsoulayrol/flaw)
     * lib/bashets (http://gitorious.org/bashets)
     * lib/awesompd (https://github.com/alexander-yakushev/awesompd)
-    * lib/revelation (https://github.com/bioe007/awesome-revelation)
 
 
 Steps to get this config running:
