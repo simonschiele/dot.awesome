@@ -19,18 +19,19 @@ require('applications')
 -- Load lib/tools.lua, a few helper and functions this config needs to work
 require('tools')
 
-
 -- {{{ config stuff 
 
 -- Don't change config values here!!! Create myconfig.lua and overwrite config there!
 -- Possible config settings are well documented in the myconfig.lua-example
 
-application_config = {}
--- autostart_config = {}
 config = {}
 config['modkey'] = "Mod4"
 config['altkey'] = "Mod1"
 config['main_screen'] = 1 
+
+widgets = {layout = awful.widget.layout.horizontal.rightleft}
+autostart_config = {}
+application_config = {}
 
 if exists(config_dir .. "/myconfig.lua") then
     require("myconfig")
@@ -38,6 +39,7 @@ end
 
 modkey = config['modkey']
 altkey = config['altkey']
+
 -- }}}
 
 -- {{{ Set Theme
@@ -119,6 +121,80 @@ end
 -- {{{ Vicious 
 if config['vicious'] then
     require('lib/vicious')
+    
+    if config['vicious_cpu'] then
+        cpuicon = widget({ type = "imagebox", name = "cpuicon" })
+        cpuicon.image = image(beautiful.widget_cpu)
+        cpuwidget = awful.widget.graph()
+        cpuwidget:set_width(50)
+        cpuwidget:set_height(18)
+        cpuwidget:set_background_color("#494B4F")
+        cpuwidget:set_color("#FF5656")
+        cpuwidget:set_gradient_colors({ "#FF5656", "#88A175", "#AECF96" })
+        --  cpuwidget:set_max_value(200)
+        
+        vicious.register(cpuwidget, vicious.widgets.cpu, '$1', 3)
+        table.insert(widgets,dspacer)
+        table.insert(widgets,cpuwidget.widget)
+        table.insert(widgets,cpuicon)
+    end
+            
+    if config['vicious_mem'] then
+        memicon = widget({ type = "imagebox", name = "memicon" })
+        memicon.image = image(beautiful.widget_mem)
+        memwidget = awful.widget.progressbar()
+        memwidget:set_width(8)
+        memwidget:set_height(18)
+        memwidget:set_vertical(true)
+        memwidget:set_background_color('#494B4F')
+        memwidget:set_color('#FF5656')
+        memwidget:set_gradient_colors({ '#FF5656', '#88A175', '#AECF96' })
+        -- vicious.enable_caching(vicious.widgets.mem)
+        
+        vicious.register(memwidget, vicious.widgets.mem, "$1", 13)
+        table.insert(widgets,dspacer)
+        table.insert(widgets,memwidget.widget)
+        table.insert(widgets,memicon)
+    end
+    
+    if config['vicious_bat'] then
+        baticon = widget({ type = "imagebox", name = "baticon" })
+        baticon.image = image(beautiful.widget_bat)
+        batwidget = widget({ type = "textbox", name = "batwidget" })
+        
+        vicious.register(batwidget, vicious.widgets.bat, "$1$2%", 61, "BAT0")
+        table.insert(widgets,dspacer)
+        table.insert(widgets,batwidget)
+        table.insert(widgets,baticon)
+    end
+
+    if config['vicious_net'] then
+        neticon = widget({ type = "imagebox", name = "neticon" })
+        neticonup = widget({ type = "imagebox", name = "neticonup" })
+        neticon.image = image(beautiful.widget_net)
+        neticonup.image = image(beautiful.widget_netup)
+        netwidget = widget({ type = "textbox", name = "netwidget" })
+        --vicious.enable_caching(vicious.widgets.net)
+        
+        vicious.register(netwidget, vicious.widgets.net, '<span color="'
+            .. beautiful.fg_netdn_widget ..'">${'.. device_wired ..' down_kb}</span> <span color="'
+            .. beautiful.fg_netup_widget ..'">${'.. device_wired ..' up_kb}</span>', 3)
+        table.insert(widgets,dspacer) 
+        table.insert(widgets,neticonup) 
+        table.insert(widgets,netwidget) 
+        table.insert(widgets,neticon) 
+        
+        if config['laptop'] then
+            netfiwidget = widget({ type = "textbox", name = "netfiwidget" })
+            vicious.register(netfiwidget, vicious.widgets.net, '<span color="'
+                .. beautiful.fg_netdn_widget ..'">${'..device_wireless ..' down_kb}</span> <span color="'
+                .. beautiful.fg_netup_widget ..'">${'.. device_wireless ..' up_kb}</span>', 3)
+            table.insert(widgets,dspacer) 
+            table.insert(widgets,neticonup) 
+            table.insert(widgets,netfiwidget) 
+            table.insert(widgets,neticon) 
+        end
+    end
 end
 -- }}}
 
@@ -141,7 +217,8 @@ end
 -- }}}
 
 -- {{{ Wibox
--- Create a textclock widget
+
+-- Create a clock widget
 if config['obvious_clock'] then
     textclock = obvious.clock()
 else
@@ -206,6 +283,7 @@ mytasklist.buttons = awful.util.table.join(
 for s = 1, screen.count() do
     -- Create a promptbox for each screen
     mypromptbox[s] = awful.widget.prompt({ layout = awful.widget.layout.horizontal.leftright })
+    
     -- Create an imagebox widget which will contains an icon indicating which layout we're using.
     -- We need one layoutbox per screen.
     mylayoutbox[s] = awful.widget.layoutbox(s)
@@ -214,6 +292,7 @@ for s = 1, screen.count() do
                            awful.button({ }, 3, function () awful.layout.inc(layouts, -1) end),
                            awful.button({ }, 4, function () awful.layout.inc(layouts, 1) end),
                            awful.button({ }, 5, function () awful.layout.inc(layouts, -1) end)))
+    
     -- Create a taglist widget
     mytaglist[s] = awful.widget.taglist(s, awful.widget.taglist.label.all, mytaglist.buttons)
 
@@ -224,7 +303,6 @@ for s = 1, screen.count() do
 
     -- Create the wibox
     mywibox[s] = awful.wibox({ position = "top", screen = s })
-    -- Add widgets to the wibox - order matters
     mywibox[s].widgets = {
         {
             mylauncher,
@@ -234,8 +312,11 @@ for s = 1, screen.count() do
             layout = awful.widget.layout.horizontal.leftright
         },
         mylayoutbox[s],
+        
         s == config['main_screen'] and textclock or nil,
+        s == config['main_screen'] and widgets or nil,
         s == config['main_screen'] and systray or nil,
+        
         config['taskbar'] ~= 'bottom' and config['taskbar'] ~= 'off' and dspacer,
         config['taskbar'] ~= 'bottom' and config['taskbar'] ~= 'off' and mytasklist[s],
         
@@ -247,7 +328,7 @@ for s = 1, screen.count() do
         mytaskbox[s].widgets = {
             mytasklist[s],
             layout = awful.widget.layout.horizontal.leftright
-       }
+        }
     end
 end
 -- }}}
@@ -469,7 +550,7 @@ client.add_signal("unfocus", function(c) c.border_color = beautiful.border_norma
 
 -- {{{ Autostart
 if autostart_config ~= nil then
-    autostart(autostart_config)
+    -- autostart(autostart_config)
 end
 -- }}}
 
