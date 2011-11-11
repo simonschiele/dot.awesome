@@ -22,6 +22,17 @@ if config['tag_font'] then
     theme.taglist_font = config['tag_font']
 end
 
+theme.widget_cpu    = os.getenv("HOME") .. "/.config/awesome/themes/zenburn/icons/cpu.png"
+theme.widget_bat    = os.getenv("HOME") .. "/.config/awesome/themes/zenburn/icons/bat.png"
+theme.widget_mem    = os.getenv("HOME") .. "/.config/awesome/themes/zenburn/icons/mem.png"
+theme.widget_fs     = os.getenv("HOME") .. "/.config/awesome/themes/zenburn/icons/disk.png"
+theme.widget_net    = os.getenv("HOME") .. "/.config/awesome/themes/zenburn/icons/down.png"
+theme.widget_netup  = os.getenv("HOME") .. "/.config/awesome/themes/zenburn/icons/up.png"
+theme.widget_mail   = os.getenv("HOME") .. "/.config/awesome/themes/zenburn/icons/mail.png"
+theme.widget_vol    = os.getenv("HOME") .. "/.config/awesome/themes/zenburn/icons/vol.png"
+theme.widget_org    = os.getenv("HOME") .. "/.config/awesome/themes/zenburn/icons/cal.png"
+theme.widget_date   = os.getenv("HOME") .. "/.config/awesome/themes/zenburn/icons/time.png"
+theme.widget_crypto = os.getenv("HOME") .. "/.config/awesome/themes/zenburn/icons/crypto.png"
 
 -- {{{ Colors
 theme.fg_normal = "#DCDCCC"
