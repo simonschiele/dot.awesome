@@ -131,6 +131,35 @@ if config['vicious_cpu'] or config['vicious_mem'] or config['vicious_bat'] or co
     beautiful.border_widget    = beautiful.bg_normal
 end   
 
+if config['laptop'] and config['vicious_bat'] ~= false then
+    baticon = widget({ type = "imagebox", name = "baticon" })
+    baticon.image = image(beautiful.widget_bat)
+    batwidget = widget({ type = "textbox", name = "batwidget" })
+    
+    vicious.register(batwidget, vicious.widgets.bat, "$1$2%", 61, "BAT0")
+    table.insert(widgets,dspacer)
+    table.insert(widgets,batwidget)
+    table.insert(widgets,baticon)
+end
+
+if config['vicious_mem'] then
+    memicon = widget({ type = "imagebox", name = "memicon" })
+    memicon.image = image(beautiful.widget_mem)
+    memwidget = awful.widget.progressbar()
+    memwidget:set_width(8)
+    memwidget:set_height(18)
+    memwidget:set_vertical(true)
+    memwidget:set_background_color('#494B4F')
+    memwidget:set_color('#FF5656')
+    memwidget:set_gradient_colors({ '#FF5656', '#88A175', '#AECF96' })
+    -- vicious.enable_caching(vicious.widgets.mem)
+    
+    vicious.register(memwidget, vicious.widgets.mem, "$1", 13)
+    table.insert(widgets,dspacer)
+    table.insert(widgets,memwidget.widget)
+    table.insert(widgets,memicon)
+end
+
 if config['vicious_cpu'] then
     cpuicon = widget({ type = "imagebox", name = "cpuicon" })
     cpuicon.image = image(beautiful.widget_cpu)
@@ -152,35 +181,6 @@ if config['vicious_cpu'] then
     table.insert(widgets,cpuicon)
 end
         
-if config['vicious_mem'] then
-    memicon = widget({ type = "imagebox", name = "memicon" })
-    memicon.image = image(beautiful.widget_mem)
-    memwidget = awful.widget.progressbar()
-    memwidget:set_width(8)
-    memwidget:set_height(18)
-    memwidget:set_vertical(true)
-    memwidget:set_background_color('#494B4F')
-    memwidget:set_color('#FF5656')
-    memwidget:set_gradient_colors({ '#FF5656', '#88A175', '#AECF96' })
-    -- vicious.enable_caching(vicious.widgets.mem)
-    
-    vicious.register(memwidget, vicious.widgets.mem, "$1", 13)
-    table.insert(widgets,dspacer)
-    table.insert(widgets,memwidget.widget)
-    table.insert(widgets,memicon)
-end
-
-if config['laptop'] and config['vicious_bat'] ~= false then
-    baticon = widget({ type = "imagebox", name = "baticon" })
-    baticon.image = image(beautiful.widget_bat)
-    batwidget = widget({ type = "textbox", name = "batwidget" })
-    
-    vicious.register(batwidget, vicious.widgets.bat, "$1$2%", 61, "BAT0")
-    table.insert(widgets,dspacer)
-    table.insert(widgets,batwidget)
-    table.insert(widgets,baticon)
-end
-
 if config['vicious_net'] then
     if not config['device_wired'] then
         config['device_wired'] = 'eth0'
@@ -191,14 +191,6 @@ if config['vicious_net'] then
     neticonup.image = image(beautiful.widget_netup)
     netwidget = widget({ type = "textbox", name = "netwidget" })
     --vicious.enable_caching(vicious.widgets.net)
-    
-    vicious.register(netwidget, vicious.widgets.net, '<span color="'
-        .. beautiful.fg_netdn_widget ..'">${'.. config['device_wired'] ..' down_kb}</span> <span color="'
-        .. beautiful.fg_netup_widget ..'">${'.. config['device_wired'] ..' up_kb}</span>', 3)
-    table.insert(widgets,dspacer) 
-    table.insert(widgets,neticonup) 
-    table.insert(widgets,netwidget) 
-    table.insert(widgets,neticon) 
     
     if config['laptop'] then
         if not config['device_wireless'] then
@@ -213,6 +205,15 @@ if config['vicious_net'] then
         table.insert(widgets,netfiwidget) 
         table.insert(widgets,neticon) 
     end
+    
+    vicious.register(netwidget, vicious.widgets.net, '<span color="'
+        .. beautiful.fg_netdn_widget ..'">${'.. config['device_wired'] ..' down_kb}</span> <span color="'
+        .. beautiful.fg_netup_widget ..'">${'.. config['device_wired'] ..' up_kb}</span>', 3)
+    table.insert(widgets,dspacer) 
+    table.insert(widgets,neticonup) 
+    table.insert(widgets,netwidget) 
+    table.insert(widgets,neticon) 
+    
 end
 -- }}}
 
