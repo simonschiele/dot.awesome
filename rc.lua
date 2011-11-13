@@ -121,6 +121,14 @@ end
 -- {{{ Vicious 
 if config['vicious_cpu'] or config['vicious_mem'] or config['vicious_bat'] or config['vicious_net'] or config['laptop'] then
     require('lib/vicious')
+    beautiful.fg_widget        = "#AECF96"
+    beautiful.fg_center_widget = "#88A175"
+    beautiful.fg_end_widget    = "#FF5656"
+    beautiful.fg_off_widget    = "#494B4F"
+    beautiful.fg_netup_widget  = "#7F9F7F"
+    beautiful.fg_netdn_widget  = beautiful.fg_urgent
+    beautiful.bg_widget        = beautiful.bg_normal
+    beautiful.border_widget    = beautiful.bg_normal
 end   
 
 if config['vicious_cpu'] then
@@ -176,7 +184,7 @@ end
 if config['vicious_net'] then
     if not config['device_wired'] then
         config['device_wired'] = 'eth0'
-    then
+    end 
     neticon = widget({ type = "imagebox", name = "neticon" })
     neticonup = widget({ type = "imagebox", name = "neticonup" })
     neticon.image = image(beautiful.widget_net)
@@ -195,7 +203,7 @@ if config['vicious_net'] then
     if config['laptop'] then
         if not config['device_wireless'] then
             config['device_wireless'] = 'wlan0'
-        then
+        end 
         netfiwidget = widget({ type = "textbox", name = "netfiwidget" })
         vicious.register(netfiwidget, vicious.widgets.net, '<span color="'
             .. beautiful.fg_netdn_widget ..'">${'.. config['device_wireless'] ..' down_kb}</span> <span color="'
@@ -210,19 +218,19 @@ end
 
 -- {{{ Bashets 
 if config['bashets'] then
-    require('lib/bashets')
+    --    require('lib/bashets')
 end
 -- }}}
 
 -- {{{ Flaw
 if config['flaw'] then
-    require('lib/flaw')
+    --    require('lib/flaw')
 end
 -- }}}
 
 -- {{{ Awesompd
 if config['awesompd'] then
-    require('lib/awesompd')
+    --    require('lib/awesompd')
 end
 -- }}}
 
@@ -559,8 +567,8 @@ client.add_signal("unfocus", function(c) c.border_color = beautiful.border_norma
 -- }}}
 
 -- {{{ Autostart
-if autostart_config ~= nil then
+-- if autostart_config ~= nil then
     -- autostart(autostart_config)
-end
+-- end
 -- }}}
 
