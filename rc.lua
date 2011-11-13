@@ -119,7 +119,7 @@ end
 -- }}}
 
 -- {{{ Vicious 
-if config['vicious_cpu'] or config['vicious_mem'] or config['vicious_bat'] or config['vicious_net'] then
+if config['vicious_cpu'] or config['vicious_mem'] or config['vicious_bat'] or config['vicious_net'] or config['laptop'] then
     require('lib/vicious')
 end   
 
@@ -127,7 +127,11 @@ if config['vicious_cpu'] then
     cpuicon = widget({ type = "imagebox", name = "cpuicon" })
     cpuicon.image = image(beautiful.widget_cpu)
     cpuwidget = awful.widget.graph()
-    cpuwidget:set_width(50)
+    if config['small_screen'] then
+        cpuwidget:set_width(50)
+    else
+        cpuwidget:set_width(100)
+    end
     cpuwidget:set_height(18)
     cpuwidget:set_background_color("#494B4F")
     cpuwidget:set_color("#FF5656")
@@ -158,7 +162,7 @@ if config['vicious_mem'] then
     table.insert(widgets,memicon)
 end
 
-if config['vicious_bat'] then
+if config['laptop'] and config['vicious_bat'] ~= false then
     baticon = widget({ type = "imagebox", name = "baticon" })
     baticon.image = image(beautiful.widget_bat)
     batwidget = widget({ type = "textbox", name = "batwidget" })
@@ -170,6 +174,9 @@ if config['vicious_bat'] then
 end
 
 if config['vicious_net'] then
+    if not config['device_wired'] then
+        config['device_wired'] = 'eth0'
+    then
     neticon = widget({ type = "imagebox", name = "neticon" })
     neticonup = widget({ type = "imagebox", name = "neticonup" })
     neticon.image = image(beautiful.widget_net)
@@ -178,18 +185,21 @@ if config['vicious_net'] then
     --vicious.enable_caching(vicious.widgets.net)
     
     vicious.register(netwidget, vicious.widgets.net, '<span color="'
-        .. beautiful.fg_netdn_widget ..'">${'.. device_wired ..' down_kb}</span> <span color="'
-        .. beautiful.fg_netup_widget ..'">${'.. device_wired ..' up_kb}</span>', 3)
+        .. beautiful.fg_netdn_widget ..'">${'.. config['device_wired'] ..' down_kb}</span> <span color="'
+        .. beautiful.fg_netup_widget ..'">${'.. config['device_wired'] ..' up_kb}</span>', 3)
     table.insert(widgets,dspacer) 
     table.insert(widgets,neticonup) 
     table.insert(widgets,netwidget) 
     table.insert(widgets,neticon) 
     
     if config['laptop'] then
+        if not config['device_wireless'] then
+            config['device_wireless'] = 'wlan0'
+        then
         netfiwidget = widget({ type = "textbox", name = "netfiwidget" })
         vicious.register(netfiwidget, vicious.widgets.net, '<span color="'
-            .. beautiful.fg_netdn_widget ..'">${'..device_wireless ..' down_kb}</span> <span color="'
-            .. beautiful.fg_netup_widget ..'">${'.. device_wireless ..' up_kb}</span>', 3)
+            .. beautiful.fg_netdn_widget ..'">${'.. config['device_wireless'] ..' down_kb}</span> <span color="'
+            .. beautiful.fg_netup_widget ..'">${'.. config['device_wireless'] ..' up_kb}</span>', 3)
         table.insert(widgets,dspacer) 
         table.insert(widgets,neticonup) 
         table.insert(widgets,netfiwidget) 
