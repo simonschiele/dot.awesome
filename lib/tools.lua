@@ -7,12 +7,15 @@ function autostart(autostart_config)
     for appname,appdata in pairs(autostart_config) do
         print("> starting " .. appname)
         if autostart_config[appname].shell == nil or autostart_config[appname].shell == false then
-            application_config[awful.util.spawn(autostart_config[appname].cmd)] = appdata
+            pid = awful.util.spawn(autostart_config[appname].cmd)
+            application_config[pid] = appdata
+            print("pid first:" .. tostring(pid))
         else
             awful.util.spawn_with_shell(autostart_config[appname].cmd)
         end
         print("> finished starting " .. appname)
     end
+    print_r(application_config)
 end
 
 function exists(filename)
