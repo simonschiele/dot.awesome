@@ -1,16 +1,15 @@
 -- Applications
-terminal = "gnome-terminal --disable-factory"
+terminal = "gnome-terminal.wrapper --disable-factory"
 terminal_exec = terminal .. " -e "
 editor = "vim"
 editor_cmd = terminal_exec .. editor
 screen_lock = "xscreensaver-command --lock"
-
+xsu = "gksudo"
 browser = "iceweasel" 
 mailer = "icedove"
 filer = "thunar"
 sysconfig = "gnome-control-center"
 mixer = "alsamixergui"
-xsu = "gksudo"
 
 -- Menu
 function get_mainmenu()
