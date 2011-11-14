@@ -1,6 +1,6 @@
 -- path
 config_dir = os.getenv("HOME") .. "/.config/awesome"
-package.path = package.path .. ";" .. config_dir .. "/lib/?/init.lua;" .. config_dir .. "/lib/?;" .. config_dir .. "/lib/?.lua"
+package.path = package.path .. ";" .. config_dir .. "/lib/?/init.lua;" .. config_dir .. "/lib/?.lua"
 
 -- Standard awesome library
 require('awful')
@@ -17,7 +17,7 @@ require('naughty')
 require('applications')
 
 -- Load lib/tools.lua, a few helper and functions this config needs to work
-require('tools')
+require('lib/tools')
 
 -- {{{ config stuff 
 
@@ -27,7 +27,6 @@ require('tools')
 config = {}
 config['modkey'] = "Mod4"
 config['altkey'] = "Mod1"
-config['main_screen'] = 1 
 
 widgets = {layout = awful.widget.layout.horizontal.rightleft}
 autostart_config = {}
@@ -39,6 +38,10 @@ end
 
 modkey = config['modkey']
 altkey = config['altkey']
+
+if not config['main_screen'] or config['main_screen'] > screen.count() then
+    config['main_screen'] = 1    
+end
 
 -- }}}
 
@@ -85,10 +88,16 @@ for s = 1, screen.count() do
     else
         tagnames = {"1","2","3","4","5","6","7","8","9"}
     end
+    
     if not config['tag_count'] then
-        config['tag_count'] = 6 
+        if config['small_screen'] then
+            config['tag_count'] = 4 
+        else
+            config['tag_count'] = 7 
+        end
     end
-    for i = 0, 8 - config['tag_count'] do
+    
+    for i = 1, 9 - config['tag_count'] do
         table.remove(tagnames)
     end
     tags[s] = awful.tag(tagnames, s)
@@ -527,14 +536,30 @@ joinTables(awful.rules.rules,{
 -- {{{ Signals
 -- Signal function to execute when a new client appears.
 client.add_signal("manage", function (c, startup)
-    -- if application_config[c.pid] ~= nil then
-    --    if application_config[c.pid].screen ~= nil then
-    --        c.screen = application_config[c.pid].screen
-    --    end
-    --    if application_config[c.pid].tag ~= nil then
-    --        c:tags({ screen[c.screen]:tags()[application_config[c.pid].tag] })
-    --    end
-    -- end
+    
+    print(" >> [" ..tostring(c.pid).."] app started")
+    print(" >> c.name:" .. tostring(c.name))
+    print(" >> c.role:" .. tostring(c.role))
+    print(" >> c.leader_id:" .. tostring(c.leader_id))
+    print(" >> c.type:" .. tostring(c.type))
+    print(" >> c.modal:" .. tostring(c.modal))
+    print(" >> c.class:" .. tostring(c.class))
+    print(" >> c.instance:" .. tostring(c.instance))
+    print(" >> c.pid:" .. tostring(c.pid))
+    
+    if application_config[c.pid] ~= nil then
+        print(" >> [" ..tostring(c.pid).."] it's a autostart app")
+        
+        if application_config[c.pid].screen ~= nil then
+            c.screen = application_config[c.pid].screen
+        end
+        
+        if application_config[c.pid].tag ~= nil then
+            c:tags({ screen[c.screen]:tags()[application_config[c.pid].tag] })
+        end
+    
+    end
+    print(" ") 
     
     if config['titlebar'] then
         awful.titlebar.add(c, { modkey = modkey })
@@ -568,8 +593,8 @@ client.add_signal("unfocus", function(c) c.border_color = beautiful.border_norma
 -- }}}
 
 -- {{{ Autostart
--- if autostart_config ~= nil then
-    -- autostart(autostart_config)
--- end
+if next(autostart_config) ~= nil then
+    autostart(autostart_config)
+end
 -- }}}
 
