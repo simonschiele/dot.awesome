@@ -12,7 +12,7 @@
 --- If this computer is a laptop, this switch will optimize awesome a littlebit (bat & wlan widget,...) 
 -- config['laptop'] = true
 
---- optimize for small screens like on netbooks
+--- optimize for small screens and low resolutions like on netbooks
 -- config['small_screen'] = true
 
 --- Make a seperate taskbar. I prefer to have my open applications at the bottom of the screen
@@ -39,11 +39,11 @@
 -- config['tag_font'] = "sans 8"
 
 --- Enable/Disable widgets
+-- config['obvious_clock'] = true 
 -- config['vicious_cpu'] = true 
 -- config['vicious_mem'] = true 
 -- config['vicious_bat'] = true 
 -- config['vicious_net'] = true 
--- config['obvious_clock'] = true 
 
 --- Enable awesompd
 -- config['awesompd'] = true 
@@ -64,10 +64,10 @@
 -- config['device_wireless'] = "wlan0"
 
 --- Application Autostart
---- Rules to autostart applications. You can define shell, screen, tag, sudo and kill_running.
--- autostart_config['xterm'] = {cmd = "xterm", shell = false, screen = 1, tag = 2, kill_running = false, }
--- autostart_config['xclock'] = {cmd = "xclock", shell = false, screen = 1, tag = 2}
--- autostart_config['xcalc'] = {cmd = "xcalc", shell = false, screen = 1, tag = 2}
+--- Rules to autostart applications. You can define shell, screen, tag, sudo, floating and kill_running.
+-- autostart_config['xterm'] = {cmd = "xterm", shell = false, sudo = true}
+-- autostart_config['xclock'] = {cmd = "xclock", shell = false, kill = true}
+-- autostart_config['xcalc'] = {cmd = "xcalc", shell = false, screen = 2, tag = 3}
 
 --- Application rule stuff - for every application raise.
 -- awful.rules.rules = {
