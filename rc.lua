@@ -115,6 +115,7 @@ separator = widget({ type = "textbox", name = "separator" })
 spacer.text     = " "
 dspacer.text    = "  "
 separator.text  = "|"               -- " syntaxhighlite-fix
+space           = " "
 -- }}}
 
 -- {{{ Obvious 
@@ -425,10 +426,17 @@ globalkeys = awful.util.table.join(
                 awful.prompt.run({ prompt = "SSH: " },
                 mypromptbox[mouse.screen].widget,
                 function (s)
-                    awful.util.spawn(terminal_exec .. "ssh -vvv " .. s)
+                    awful.util.spawn(terminal_exec .. ssh_cmd .. space .. s)
                 end)
             end), 
-
+    awful.key({ modkey, "Shift" }, "s",
+            function ()
+                awful.prompt.run({ prompt = "SSH -X: " },
+                mypromptbox[mouse.screen].widget,
+                function (s)
+                    awful.util.spawn(terminal_exec .. ssh_cmd .. " -X " .. s)
+                end)
+            end), 
 
     awful.key({ modkey }, "F12", function () awful.util.spawn(screen_lock) end),
 

@@ -1,8 +1,7 @@
 -- Applications
 terminal = "gnome-terminal.wrapper --disable-factory"
-terminal_exec = terminal .. " -e "
 editor = "vim"
-editor_cmd = terminal_exec .. editor
+ssh_cmd = "ssh -v" 
 screen_lock = "xscreensaver-command --lock"
 xsu = "gksudo"
 browser = "iceweasel" 
@@ -10,6 +9,9 @@ mailer = "icedove"
 filer = "thunar"
 sysconfig = "gnome-control-center"
 mixer = "alsamixergui"
+
+terminal_exec = terminal .. " -e "
+editor_cmd = terminal_exec .. editor
 
 -- Menu
 function get_mainmenu()
