@@ -39,11 +39,6 @@ Steps to get this config running:
     cp myconfig.lua-example myconfig.lua
     vim myconfig.lua
 
-    # To later update repos just do these two steps:
-    cd ~/.config/awesome/
-    git pull
-    git submodule foreach 'git pull'
-
 
 My Default Keysetting:
     
