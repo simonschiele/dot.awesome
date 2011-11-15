@@ -559,29 +559,30 @@ joinTables(awful.rules.rules,{
 -- Signal function to execute when a new client appears.
 client.add_signal("manage", function (c, startup)
     
-    print(" >> [" ..tostring(c.pid).."] app started")
-    print(" >> c.name:" .. tostring(c.name))
-    print(" >> c.role:" .. tostring(c.role))
-    print(" >> c.leader_id:" .. tostring(c.leader_id))
-    print(" >> c.type:" .. tostring(c.type))
-    print(" >> c.modal:" .. tostring(c.modal))
-    print(" >> c.class:" .. tostring(c.class))
-    print(" >> c.instance:" .. tostring(c.instance))
-    print(" >> c.pid:" .. tostring(c.pid))
-    
-    if application_config[c.pid] ~= nil then
-        print(" >> [" ..tostring(c.pid).."] it's a autostart app")
+    if c.pid == 0 then
+        local fpid = io.popen("pgrep -u " .. os.getenv("USER") .. " -n " .. c.instance)
+        local instance_pid = fpid:read("*n")
+        fpid:close()
+        if instance_pid then
+            pid = tonumber(instance_pid)
+        else
+            pid = 0
+        end
+    else
+        pid = c.pid
+    end
+
+    if application_config[pid] ~= nil then
         
-        if application_config[c.pid].screen ~= nil then
-            c.screen = application_config[c.pid].screen
+        if application_config[pid].screen ~= nil then
+            c.screen = application_config[pid].screen
         end
         
-        if application_config[c.pid].tag ~= nil then
-            c:tags({ screen[c.screen]:tags()[application_config[c.pid].tag] })
+        if application_config[pid].tag ~= nil then
+            c:tags({ screen[c.screen]:tags()[application_config[pid].tag] })
         end
     
     end
-    print(" ") 
     
     if config['titlebar'] then
         awful.titlebar.add(c, { modkey = modkey })

@@ -9,11 +9,9 @@ function autostart(autostart_config)
         if autostart_config[appname].shell == nil or autostart_config[appname].shell == false then
             pid = awful.util.spawn(autostart_config[appname].cmd)
             application_config[pid] = appdata
-            print("pid first:" .. tostring(pid))
         else
             awful.util.spawn_with_shell(autostart_config[appname].cmd)
         end
-        print("> finished starting " .. appname)
     end
     print_r(application_config)
 end
