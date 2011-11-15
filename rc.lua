@@ -153,7 +153,7 @@ if config['vicious_cpu'] or config['vicious_mem'] or config['vicious_bat'] or co
     beautiful.border_widget    = beautiful.bg_normal
 end   
 
-if config['laptop'] and config['vicious_bat'] ~= false then
+if (config['laptop'] and config['vicious_bat'] ~= false) or config['vicious_bat'] then
     baticon = widget({ type = "imagebox", name = "baticon" })
     baticon.image = image(beautiful.widget_bat)
     batwidget = widget({ type = "textbox", name = "batwidget" })
