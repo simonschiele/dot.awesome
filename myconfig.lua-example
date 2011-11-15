@@ -40,6 +40,8 @@
 
 --- Enable/Disable widgets
 -- config['obvious_clock'] = true 
+-- config['obvious_exec'] = true 
+-- config['obvious_ssh'] = true 
 -- config['vicious_cpu'] = true 
 -- config['vicious_mem'] = true 
 -- config['vicious_bat'] = true 

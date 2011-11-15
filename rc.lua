@@ -126,6 +126,18 @@ if config['obvious_clock'] then
     obvious.clock.set_shortformat(function () return " <b>%X</b>" end)
     obvious.clock.set_longformat(function () return " <b>%a %b %d, %T </b> " end)
 end
+
+if config['obvious_exec'] then
+    require('obvious.popup_run_prompt')
+    -- obvious.popup_run_prompt.set_opacity(0.7)
+    -- obvious.popup_run_prompt.set_slide(true)
+end
+
+config['obvious_ssh'] = true
+if config['obvious_ssh'] then
+    require('popup_ssh_prompt')
+end
+
 -- }}}
 
 -- {{{ Vicious 
@@ -419,9 +431,10 @@ globalkeys = awful.util.table.join(
 
     -- Prompt / Exec Applications
     awful.key({ modkey }, "Return", function () awful.util.spawn(terminal) end),
-    awful.key({ modkey }, "r", function () mypromptbox[mouse.screen]:run() end),
-    awful.key({ modkey }, "e", function () mypromptbox[mouse.screen]:run() end),
-    awful.key({ modkey }, "s",
+    awful.key({ modkey }, "r", config['obvious_exec'] and obvious.popup_run_prompt.run_prompt or function () mypromptbox[mouse.screen]:run() end),
+    awful.key({ modkey }, "e", config['obvious_exec'] and obvious.popup_run_prompt.run_prompt or function () mypromptbox[mouse.screen]:run() end),
+    
+    awful.key({ modkey }, "s", config['obvious_ssh'] and obvious.popup_ssh_prompt.run_prompt or  
             function ()
                 awful.prompt.run({ prompt = "SSH: " },
                 mypromptbox[mouse.screen].widget,
@@ -429,6 +442,7 @@ globalkeys = awful.util.table.join(
                     awful.util.spawn(terminal_exec .. ssh_cmd .. space .. s)
                 end)
             end), 
+        
     awful.key({ modkey, "Shift" }, "s",
             function ()
                 awful.prompt.run({ prompt = "SSH -X: " },
