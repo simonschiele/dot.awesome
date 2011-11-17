@@ -235,9 +235,13 @@ if config['vicious_cpu'] then
 end
         
 if config['vicious_net'] then
+    ethericon = widget({ type = "imagebox", name = "ethericon" })
+    ethericon.image = image(beautiful.widget_rss)
+    
     if not config['device_wired'] then
         config['device_wired'] = 'eth0'
     end 
+    
     neticon = widget({ type = "imagebox", name = "neticon" })
     neticonup = widget({ type = "imagebox", name = "neticonup" })
     neticon.image = image(beautiful.widget_net)
@@ -246,9 +250,13 @@ if config['vicious_net'] then
     --vicious.enable_caching(vicious.widgets.net)
     
     if config['laptop'] then
+        wifiicon = widget({ type = "imagebox", name = "wifiicon" })
+        wifiicon.image = image(beautiful.widget_wifi)
+        
         if not config['device_wireless'] then
             config['device_wireless'] = 'wlan0'
         end 
+        
         netfiwidget = widget({ type = "textbox", name = "netfiwidget" })
         vicious.register(netfiwidget, vicious.widgets.net, '<span color="'
             .. beautiful.fg_netdn_widget ..'">${'.. config['device_wireless'] ..' down_kb}</span> <span color="'
@@ -257,6 +265,7 @@ if config['vicious_net'] then
         table.insert(widgets,neticonup) 
         table.insert(widgets,netfiwidget) 
         table.insert(widgets,neticon) 
+        table.insert(widgets,wifiicon) 
     end
     
     vicious.register(netwidget, vicious.widgets.net, '<span color="'
@@ -266,6 +275,7 @@ if config['vicious_net'] then
     table.insert(widgets,neticonup) 
     table.insert(widgets,netwidget) 
     table.insert(widgets,neticon) 
+    table.insert(widgets,ethericon) 
     
 end
 -- }}}
@@ -386,8 +396,8 @@ for s = 1, screen.count() do
         mylayoutbox[s],
         
         s == config['main_screen'] and textclock or nil,
-        s == config['main_screen'] and widgets or nil,
         s == config['main_screen'] and systray or nil,
+        s == config['main_screen'] and widgets or nil,
         
         config['taskbar'] ~= 'bottom' and config['taskbar'] ~= 'off' and dspacer,
         config['taskbar'] ~= 'bottom' and config['taskbar'] ~= 'off' and mytasklist[s],
@@ -616,7 +626,7 @@ client.add_signal("manage", function (c, startup)
         end
         
         if application_config[pid]['tag'] ~= nil then
-            c:tags({ screen[c.screen]:tags()[application_config[pid]['tag'] })
+            c:tags({ screen[c.screen]:tags()[application_config[pid]['tag']] })
         end
     
     end

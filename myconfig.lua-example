@@ -54,7 +54,7 @@
 
 --- Enable awesompd
 -- config.awesompd = true 
--- config.awesompd_hosts = {
+-- config.mpd_hosts = {
 --    { server = "localhost", port = 6600 },
 --    { server = "wohnzimmer", port = 6600 },
 --    { server = "schlafzimmer", port = 6600 },

@@ -33,6 +33,8 @@ theme.widget_vol    = os.getenv("HOME") .. "/.config/awesome/themes/zenburn/icon
 theme.widget_org    = os.getenv("HOME") .. "/.config/awesome/themes/zenburn/icons/cal.png"
 theme.widget_date   = os.getenv("HOME") .. "/.config/awesome/themes/zenburn/icons/time.png"
 theme.widget_crypto = os.getenv("HOME") .. "/.config/awesome/themes/zenburn/icons/crypto.png"
+theme.widget_wifi   = os.getenv("HOME") .. "/.config/awesome/themes/default/icons/wifi.png"
+theme.widget_rss    = os.getenv("HOME") .. "/.config/awesome/themes/default/icons/rss.png"
 
 -- {{{ Colors
 theme.fg_normal = "#DCDCCC"

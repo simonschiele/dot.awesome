@@ -109,6 +109,8 @@ theme.widget_vol    = os.getenv("HOME") .. "/.config/awesome/themes/default/icon
 theme.widget_org    = os.getenv("HOME") .. "/.config/awesome/themes/default/icons/cal.png"
 theme.widget_date   = os.getenv("HOME") .. "/.config/awesome/themes/default/icons/time.png"
 theme.widget_crypto = os.getenv("HOME") .. "/.config/awesome/themes/default/icons/crypto.png"
+theme.widget_wifi   = os.getenv("HOME") .. "/.config/awesome/themes/default/icons/wifi.png"
+theme.widget_rss    = os.getenv("HOME") .. "/.config/awesome/themes/default/icons/rss.png"
 
 theme.awesome_icon = os.getenv("HOME") .. "/.config/awesome/themes/default/awesome16.png"
 
