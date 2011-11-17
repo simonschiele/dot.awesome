@@ -591,12 +591,13 @@ joinTables(awful.rules.rules,{
 })
 -- }}}
 
--- {{{ Signals
+-- {{{ Client Signals
 -- Signal function to execute when a new client appears.
 client.add_signal("manage", function (c, startup)
     
     if c.pid == 0 then
-        local fpid = io.popen("pgrep -u " .. os.getenv("USER") .. " -n " .. c.instance)
+        -- local fpid = io.popen("pgrep -u " .. os.getenv("USER") .. " -n " .. c.instance)
+        local fpid = io.popen("pgrep -n " .. c.instance)
         local instance_pid = fpid:read("*n")
         fpid:close()
         if instance_pid then
@@ -610,12 +611,12 @@ client.add_signal("manage", function (c, startup)
 
     if application_config[pid] ~= nil then
         
-        if application_config[pid].screen ~= nil then
-            c.screen = application_config[pid].screen
+        if application_config[pid]['screen'] ~= nil and application_config[pid]['screen'] <= screen.count() then
+            c.screen = application_config[pid]['screen']
         end
         
-        if application_config[pid].tag ~= nil then
-            c:tags({ screen[c.screen]:tags()[application_config[pid].tag] })
+        if application_config[pid]['tag'] ~= nil then
+            c:tags({ screen[c.screen]:tags()[application_config[pid]['tag'] })
         end
     
     end

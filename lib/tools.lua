@@ -5,15 +5,32 @@ function autostart(autostart_config)
     end
     
     for appname,appdata in pairs(autostart_config) do
-        print("> starting " .. appname)
-        if autostart_config[appname].shell == nil or autostart_config[appname].shell == false then
-            pid = awful.util.spawn(autostart_config[appname].cmd)
-            application_config[pid] = appdata
+        
+        local cmd = ""
+        if autostart_config[appname]['sudo'] then
+            cmd = xsu .. space
+        end
+        
+        cmd = cmd .. autostart_config[appname]['cmd']
+
+        if autostart_config[appname]['shell'] then
+            pid = awful.util.spawn_with_shell(cmd)
+            
+            if pid ~= nil and pid ~= 0 then
+                application_config[pid] = appdata
+            end
+            
+            print("> started '" .. appname .. "' via awful.util.spawn_with_shell('" .. cmd .. "') -> " .. pid)
         else
-            awful.util.spawn_with_shell(autostart_config[appname].cmd)
+            pid = awful.util.spawn(cmd)
+            
+            if pid ~= nil and pid ~= 0 then
+                application_config[pid] = appdata
+            end
+            
+            print("> started '" .. appname .. "' via awful.util.spawn('" .. cmd .. "') -> " .. pid)
         end
     end
-    print_r(application_config)
 end
 
 function exists(filename)

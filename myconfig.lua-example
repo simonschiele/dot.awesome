@@ -49,8 +49,8 @@
 
 -- Widget for switching keyboard layout. Don't forget to configure your languages. 
 -- First one will be default. Default keymapping for switch is Win+F9
--- config.kbmap = true
--- config.kbmap_languages = {{ "us", "" },{ "de", ""},{ "ru", "winkeys"}}
+-- config.kbdcfg = true
+-- config.kbdcfg_languages = {{ "us", "" },{ "de", ""},{ "ru", "winkeys"}}
 
 --- Enable awesompd
 -- config.awesompd = true 
@@ -71,10 +71,11 @@
 -- config.device_wireless = "wlan0"
 
 --- Application Autostart
---- Rules to autostart applications. You can define shell, screen, tag, sudo, floating and kill_running.
--- autostart_config.xterm = {cmd = "xterm", shell = false, sudo = true}
--- autostart_config.xclock = {cmd = "xclock", shell = false, kill = true}
--- autostart_config.xcalc = {cmd = "xcalc", shell = false, screen = 2, tag = 3}
+--- Rules to autostart applications. You can define shell, screen, tag and sudo.
+-- autostart_config.xterm = {cmd = "xterm", sudo = true}
+-- autostart_config.xclock = {cmd = "xclock"}
+-- autostart_config.xcalc = {cmd = "xcalc", screen = 2, tag = 3}
+-- autostart_config.bla = {cmd = "bla | blub", shell = true}
 
 --- Application rule stuff - for every application raise.
 -- awful.rules.rules = {
