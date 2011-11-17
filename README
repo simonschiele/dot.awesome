@@ -68,11 +68,12 @@ My Default Keysetting:
     
     # Prompts & Tools
     Win + Enter                 - Terminal
-    Win + e/r                   - execute cmd 
-    Win + s                     - ssh 
+    Win + e/r                   - execute cmd
+    Win + Shift + e             - lua prompt
+    Win + s                     - ssh
     Win + Shift + s             - ssh (with X11 forwarding)
-    Win + F2                    - run lua code 
-    Win + F12                   - lock screen
+    Win + F9                    - next keyboard layout (needs config switch)
+    Win + F11/F12                   - lock screen
 
     # Awesome itself
     Win + Shift + r             - redraw awesome

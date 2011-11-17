@@ -119,25 +119,33 @@ space           = " "
 -- }}}
 
 -- {{{ Plain Widgets 
-if config['widget_kbmap'] then
+if config['kbdcfg'] then
     kbdcfg = {}
     kbdcfg.cmd = "setxkbmap"
-    if not config['widget_kbmap_languages'] then
-        kbdcfg.layout = {{ "us", "" },{ "de", ""},{ "ru", "winkeys"}}
+    if not config['kbdcfg_languages'] then
+        kbdcfg.layout = {{ "de", "" },{ "us", ""},{ "ru", "winkeys"}}
     else
-        kbdcfg.layout = config['widget_kbmap_languages'] 
+        kbdcfg.layout = config['kbdcfg_languages'] 
     end
     kbdcfg.current = 1
     kbdcfg.widget = widget({ type = "textbox", align = "right" })
-    kbdcfg.widget.text = ' ' .. string.upper(kbdcfg.layout[kbdcfg.current][1]) .. ' '
+    kbdcfg.widget.text = space .. string.upper(kbdcfg.layout[kbdcfg.current][1]) .. space
+    
     kbdcfg.switch = function ()
         kbdcfg.current = kbdcfg.current % #(kbdcfg.layout) + 1
         local t = kbdcfg.layout[kbdcfg.current]
         kbdcfg.widget.text = ' ' .. string.upper(t[1]) .. ' '
-        os.execute( kbdcfg.cmd .. " " .. t[1] .. " " .. t[2] )
+        awful.util.spawn(kbdcfg.cmd .. " " .. t[1] .. " " .. t[2])
     end
     
-    table.insert(widgets,kbdcfg) 
+    kbdcfg.widget:buttons(awful.util.table.join(
+        awful.button({ }, 1, function () kbdcfg.switch() end)
+    ))
+    
+    local t = kbdcfg.layout[kbdcfg.current]
+    awful.util.spawn(kbdcfg.cmd .. " " .. t[1] .. " " .. t[2])
+
+    table.insert(widgets,kbdcfg.widget) 
 end
 -- }}}
 
@@ -451,7 +459,7 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(layouts, -1) end),
 
     awful.key({ modkey, "Control" }, "n", awful.client.restore),
-
+    
     -- Prompt / Exec Applications
     awful.key({ modkey }, "Return", function () awful.util.spawn(terminal) end),
     awful.key({ modkey }, "r", config['obvious_exec'] and obvious.popup_run_prompt.run_prompt or function () mypromptbox[mouse.screen]:run() end),
@@ -475,15 +483,20 @@ globalkeys = awful.util.table.join(
                 end)
             end), 
 
-    awful.key({ modkey }, "F12", function () awful.util.spawn(screen_lock) end),
 
-    awful.key({ modkey }, "F2",
+    awful.key({ modkey, "Shift" }, "e",
             function ()
                 awful.prompt.run({ prompt = "Run Lua code: " },
                 mypromptbox[mouse.screen].widget,
                 awful.util.eval, nil,
                 awful.util.getdir("cache") .. "/history_eval")
-            end)
+            end),
+    
+    awful.key({ modkey }, "F11", function () awful.util.spawn(screen_lock) end),
+    awful.key({ modkey }, "F12", function () awful.util.spawn(screen_lock) end),
+    
+    -- kbdcfg
+    awful.key({ modkey }, "F9", config['kbdcfg'] and function () kbdcfg.switch() end)
 )
 
 clientkeys = awful.util.table.join(

@@ -1,55 +1,60 @@
 
 --- Modkey is your main modifier key. you get ~50 keybindings. 
 --- it's wise to use the window(s) (Mod4) key for most stuff
--- config['modkey'] = "Mod4" 
+-- config.modkey = "Mod4" 
 
 --- Mod1 == Alt Key - only used optional for window handling and app switching
--- config['altkey'] = "Mod1" 
+-- config.altkey = "Mod1" 
 
 --- Screen for systray and widgets 
--- config['main_screen'] = 2
+-- config.main_screen = 2
 
 --- If this computer is a laptop, this switch will optimize awesome a littlebit (bat & wlan widget,...) 
--- config['laptop'] = true
+-- config.laptop = true
 
 --- optimize for small screens and low resolutions like on netbooks
--- config['small_screen'] = true
+-- config.small_screen = true
 
 --- Make a seperate taskbar. I prefer to have my open applications at the bottom of the screen
--- config['taskbar'] = "bottom"         -- simple taskbar at the bottom ('simons default')
--- config['taskbar'] = "top"            -- taskbar inside top bar ('awesome default')
--- config['taskbar'] = "off" | false    -- no tasklist at all
+-- config.taskbar = "bottom"         -- simple taskbar at the bottom ('simons default')
+-- config.taskbar = "top"            -- taskbar inside top bar ('awesome default')
+-- config.taskbar = "off" | false    -- no tasklist at all
 
 --- Choose a different theme (best use only themes delivered with this repo. if not, check if the widget colors are available) 
--- config['theme'] = "default"
--- config['theme'] = "zenburn"
+-- config.theme = "default"
+-- config.theme = "zenburn"
 
 --- Set font for menus, tasklist, tagnames, ...
--- config['font'] = "sans 8"
+-- config.font = "sans 8"
 
 --- If not set, Tags are named by number. If one of the Options gets used, 
 --- you will have fancy unicode signs as Tag Names.
--- config['tag_style'] = "fancy"  
--- config['tag_style'] = "greek"
+-- config.tag_style = "fancy"  
+-- config.tag_style = "greek"
 
 --- How many tags per Screen? Only use 1-9.
--- config['tag_count'] = 7
+-- config.tag_count = 7
 
 --- Set extra font for tagnames. If not set it is the same as configured/default font.
--- config['tag_font'] = "sans 8"
+-- config.tag_font = "sans 8"
 
 --- Enable/Disable widgets
--- config['obvious_clock'] = true 
--- config['obvious_exec'] = true 
--- config['obvious_ssh'] = true 
--- config['vicious_cpu'] = true 
--- config['vicious_mem'] = true 
--- config['vicious_bat'] = true 
--- config['vicious_net'] = true 
+-- config.obvious_clock = true 
+-- config.obvious_exec = true 
+-- config.obvious_ssh = true 
+-- config.vicious_cpu = true 
+-- config.vicious_mem = true 
+-- config.vicious_bat = true 
+-- config.vicious_net = true 
+
+-- Widget for switching keyboard layout. Don't forget to configure your languages. 
+-- First one will be default. Default keymapping for switch is Win+F9
+-- config.kbmap = true
+-- config.kbmap_languages = {{ "us", "" },{ "de", ""},{ "ru", "winkeys"}}
 
 --- Enable awesompd
--- config['awesompd'] = true 
--- config['awesompd_hosts'] = {
+-- config.awesompd = true 
+-- config.awesompd_hosts = {
 --    { server = "localhost", port = 6600 },
 --    { server = "wohnzimmer", port = 6600 },
 --    { server = "schlafzimmer", port = 6600 },
@@ -58,18 +63,18 @@
 -- }
 
 --- Settings for alsamixer
--- config['alsa_device'] = 0
--- config['alsa_mixer'] = "Master"
+-- config.alsa_device = 0
+-- config.alsa_mixer = "Master"
 
 --- Devices for network widgets
--- config['device_wired'] = "eth0"
--- config['device_wireless'] = "wlan0"
+-- config.device_wired = "eth0"
+-- config.device_wireless = "wlan0"
 
 --- Application Autostart
 --- Rules to autostart applications. You can define shell, screen, tag, sudo, floating and kill_running.
--- autostart_config['xterm'] = {cmd = "xterm", shell = false, sudo = true}
--- autostart_config['xclock'] = {cmd = "xclock", shell = false, kill = true}
--- autostart_config['xcalc'] = {cmd = "xcalc", shell = false, screen = 2, tag = 3}
+-- autostart_config.xterm = {cmd = "xterm", shell = false, sudo = true}
+-- autostart_config.xclock = {cmd = "xclock", shell = false, kill = true}
+-- autostart_config.xcalc = {cmd = "xcalc", shell = false, screen = 2, tag = 3}
 
 --- Application rule stuff - for every application raise.
 -- awful.rules.rules = {
