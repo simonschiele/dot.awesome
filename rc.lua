@@ -118,6 +118,29 @@ separator.text  = "|"               -- " syntaxhighlite-fix
 space           = " "
 -- }}}
 
+-- {{{ Plain Widgets 
+if config['widget_kbmap'] then
+    kbdcfg = {}
+    kbdcfg.cmd = "setxkbmap"
+    if not config['widget_kbmap_languages'] then
+        kbdcfg.layout = {{ "us", "" },{ "de", ""},{ "ru", "winkeys"}}
+    else
+        kbdcfg.layout = config['widget_kbmap_languages'] 
+    end
+    kbdcfg.current = 1
+    kbdcfg.widget = widget({ type = "textbox", align = "right" })
+    kbdcfg.widget.text = ' ' .. string.upper(kbdcfg.layout[kbdcfg.current][1]) .. ' '
+    kbdcfg.switch = function ()
+        kbdcfg.current = kbdcfg.current % #(kbdcfg.layout) + 1
+        local t = kbdcfg.layout[kbdcfg.current]
+        kbdcfg.widget.text = ' ' .. string.upper(t[1]) .. ' '
+        os.execute( kbdcfg.cmd .. " " .. t[1] .. " " .. t[2] )
+    end
+    
+    table.insert(widgets,kbdcfg) 
+end
+-- }}}
+
 -- {{{ Obvious 
 if config['obvious_clock'] then
     require('obvious.clock')
