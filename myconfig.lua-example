@@ -9,9 +9,6 @@
 --- Screen for systray and widgets 
 -- config.main_screen = 2
 
---- If this computer is a laptop, this switch will optimize awesome a littlebit (bat & wlan widget,...) 
--- config.laptop = true
-
 --- optimize for small screens and low resolutions like on netbooks
 -- config.small_screen = true
 
@@ -46,6 +43,7 @@
 -- config.vicious_mem = true 
 -- config.vicious_bat = true 
 -- config.vicious_net = true 
+-- config.vicious_wifi = true 
 
 -- Widget for switching keyboard layout. Don't forget to configure your languages. 
 -- First one will be default. Default keymapping for switch is Win+F9

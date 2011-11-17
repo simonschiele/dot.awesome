@@ -172,7 +172,7 @@ end
 -- }}}
 
 -- {{{ Vicious 
-if config['vicious_cpu'] or config['vicious_mem'] or config['vicious_bat'] or config['vicious_net'] or config['laptop'] then
+if config['vicious_cpu'] or config['vicious_mem'] or config['vicious_bat'] or config['vicious_net'] or config['vicious_wifi'] then
     require('lib/vicious')
     beautiful.fg_widget        = "#AECF96"
     beautiful.fg_center_widget = "#88A175"
@@ -184,7 +184,7 @@ if config['vicious_cpu'] or config['vicious_mem'] or config['vicious_bat'] or co
     beautiful.border_widget    = beautiful.bg_normal
 end   
 
-if (config['laptop'] and config['vicious_bat'] ~= false) or config['vicious_bat'] then
+if config['vicious_bat'] then
     baticon = widget({ type = "imagebox", name = "baticon" })
     baticon.image = image(beautiful.widget_bat)
     batwidget = widget({ type = "textbox", name = "batwidget" })
@@ -233,40 +233,45 @@ if config['vicious_cpu'] then
     table.insert(widgets,cpuwidget.widget)
     table.insert(widgets,cpuicon)
 end
+    
+if config['vicious_wifi'] then
+    if not config['device_wireless'] then
+        config['device_wireless'] = 'wlan0'
+    end 
+    
+    wifiicon = widget({ type = "imagebox", name = "wifiicon" })
+    wifiicon.image = image(beautiful.widget_wifi)
+    neticon = widget({ type = "imagebox", name = "neticon" })
+    neticonup = widget({ type = "imagebox", name = "neticonup" })
+    neticon.image = image(beautiful.widget_net)
+    neticonup.image = image(beautiful.widget_netup)
+    netfiwidget = widget({ type = "textbox", name = "netfiwidget" })
+    --vicious.enable_caching(vicious.widgets.net)
+    
+    vicious.register(netfiwidget, vicious.widgets.net, '<span color="'
+        .. beautiful.fg_netdn_widget ..'">${'.. config['device_wireless'] ..' down_kb}</span> <span color="'
+        .. beautiful.fg_netup_widget ..'">${'.. config['device_wireless'] ..' up_kb}</span>', 3)
+    table.insert(widgets,dspacer) 
+    table.insert(widgets,neticonup) 
+    table.insert(widgets,netfiwidget) 
+    table.insert(widgets,neticon) 
+    table.insert(widgets,wifiicon) 
+end
+    
         
 if config['vicious_net'] then
-    ethericon = widget({ type = "imagebox", name = "ethericon" })
-    ethericon.image = image(beautiful.widget_rss)
-    
     if not config['device_wired'] then
         config['device_wired'] = 'eth0'
     end 
     
+    ethericon = widget({ type = "imagebox", name = "ethericon" })
+    ethericon.image = image(beautiful.widget_rss)
     neticon = widget({ type = "imagebox", name = "neticon" })
     neticonup = widget({ type = "imagebox", name = "neticonup" })
     neticon.image = image(beautiful.widget_net)
     neticonup.image = image(beautiful.widget_netup)
     netwidget = widget({ type = "textbox", name = "netwidget" })
     --vicious.enable_caching(vicious.widgets.net)
-    
-    if config['laptop'] then
-        wifiicon = widget({ type = "imagebox", name = "wifiicon" })
-        wifiicon.image = image(beautiful.widget_wifi)
-        
-        if not config['device_wireless'] then
-            config['device_wireless'] = 'wlan0'
-        end 
-        
-        netfiwidget = widget({ type = "textbox", name = "netfiwidget" })
-        vicious.register(netfiwidget, vicious.widgets.net, '<span color="'
-            .. beautiful.fg_netdn_widget ..'">${'.. config['device_wireless'] ..' down_kb}</span> <span color="'
-            .. beautiful.fg_netup_widget ..'">${'.. config['device_wireless'] ..' up_kb}</span>', 3)
-        table.insert(widgets,dspacer) 
-        table.insert(widgets,neticonup) 
-        table.insert(widgets,netfiwidget) 
-        table.insert(widgets,neticon) 
-        table.insert(widgets,wifiicon) 
-    end
     
     vicious.register(netwidget, vicious.widgets.net, '<span color="'
         .. beautiful.fg_netdn_widget ..'">${'.. config['device_wired'] ..' down_kb}</span> <span color="'
