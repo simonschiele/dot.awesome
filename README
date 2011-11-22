@@ -21,6 +21,7 @@ Included subrepos:
     * lib/bashets (http://gitorious.org/bashets)
     * lib/awesompd (https://github.com/alexander-yakushev/awesompd)
 
+
 Steps to get this config running:
     
     # Go in your config dir and move away old awesome-config:
