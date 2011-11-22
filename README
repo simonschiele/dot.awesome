@@ -13,6 +13,7 @@ Available clone paths:
     * https://github.com/simonschiele/awesome.git
     * ssh://git@psaux.de/awesome.git (send public key via email)
 
+
 Included subrepos:
     * lib/obvious (http://git.mercenariesguild.net/?p=obvious.git;a=summary)
     * lib/vicious (http://git.sysphere.org/vicious/)
