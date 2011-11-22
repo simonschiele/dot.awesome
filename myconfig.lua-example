@@ -28,6 +28,7 @@
 --- you will have fancy unicode signs as Tag Names.
 -- config.tag_style = "fancy"  
 -- config.tag_style = "greek"
+-- config.tag_style = "braille"
 
 --- How many tags per Screen? Only use 1-9.
 -- config.tag_count = 7
