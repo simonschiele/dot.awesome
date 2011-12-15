@@ -10,7 +10,8 @@ send patches to simon <simon.codingmonkey@googlemail.com>.
 Available clone paths:
     * git://simon.psaux.de/awesome.git
     * http://simon.psaux.de/git/awesome.git
-    * ssh://git@psaux.de/awesome.git
+    * https://github.com/simonschiele/awesome.git
+    * ssh://git@psaux.de/awesome.git (send public key via email)
 
 
 Included subrepos:
