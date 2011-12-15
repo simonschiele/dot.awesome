@@ -8,7 +8,7 @@ browser = "iceweasel"
 mailer = "icedove"
 filer = "thunar"
 sysconfig = "gnome-control-center"
-mixer = "alsamixergui"
+mixer = "pavucontrol"
 
 terminal_exec = terminal .. " -e "
 editor_cmd = terminal_exec .. editor
