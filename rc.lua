@@ -518,6 +518,7 @@ globalkeys = awful.util.table.join(
 
 clientkeys = awful.util.table.join(
     awful.key({ modkey,           }, "f", function (c) c.fullscreen = not c.fullscreen end),
+    awful.key({ modkey, "Shift"   }, "f", function (c) multifullscreen(c) end),
     awful.key({ modkey,           }, "x", function (c) c:kill() end),
     awful.key({ modkey, "Shift"   }, "x", function () awful.util.spawn('xkill') end),
     awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle                     ),
