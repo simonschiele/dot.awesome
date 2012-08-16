@@ -402,8 +402,9 @@ for s = 1, screen.count() do
         },
         mylayoutbox[s],
         
+        s == config['main_screen'] and config['systray_align'] == 'right' and systray or nil,
         s == config['main_screen'] and textclock or nil,
-        s == config['main_screen'] and systray or nil,
+        s == config['main_screen'] and (not config['systray_align'] or config['systray_align'] == 'left') and systray or nil,
         s == config['main_screen'] and widgets or nil,
         
         config['taskbar'] ~= 'bottom' and config['taskbar'] ~= 'off' and dspacer,

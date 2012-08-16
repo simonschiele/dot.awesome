@@ -36,6 +36,9 @@
 --- Set extra font for tagnames. If not set it is the same as configured/default font.
 -- config.tag_font = "sans 8"
 
+--- Systray left/right of clock
+-- config.systray_align = right
+
 --- Enable/Disable widgets
 -- config.obvious_clock = true 
 -- config.obvious_exec = true 
