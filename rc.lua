@@ -154,7 +154,7 @@ end
 -- {{{ Obvious 
 if config['obvious_clock'] then
     require('obvious.clock')
-    obvious.clock.set_editor(editor_cmd)
+    obvious.clock.set_editor(xeditor)
     obvious.clock.set_shorttimer(1)
     obvious.clock.set_shortformat(function () return " <b>%X</b>" end)
     obvious.clock.set_longformat(function () return " <b>%a %b %d, %T </b> " end)
@@ -483,7 +483,7 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey }, "r", config['obvious_exec'] and obvious.popup_run_prompt.run_prompt or function () mypromptbox[mouse.screen]:run() end),
     awful.key({ modkey }, "e", config['obvious_exec'] and obvious.popup_run_prompt.run_prompt or function () mypromptbox[mouse.screen]:run() end),
     
-    awful.key({ modkey }, "s", config['obvious_ssh'] and obvious.popup_ssh_prompt.run_prompt or  
+    awful.key({ modkey }, "s", not config['obvious_ssh'] and obvious.popup_ssh_prompt.run_prompt or  
             function ()
                 awful.prompt.run({ prompt = "SSH: " },
                 mypromptbox[mouse.screen].widget,

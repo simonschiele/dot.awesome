@@ -78,6 +78,15 @@
 -- autostart_config.xclock = {cmd = "xclock"}
 -- autostart_config.xcalc = {cmd = "xcalc", screen = 2, tag = 3}
 -- autostart_config.bla = {cmd = "bla | blub", shell = true}
+-- autostart_config.synergyc = {cmd = "killall -9 synergyc 2>/dev/null ; for h in 'cstation' '192.168.80.117' ; do ( fping -t 100 -q $h 2>/dev/null ) && synergyc --name $( hostname -s ) $h ; done", shell = true}
+-- autostart_config.pidgin = {cmd = "( ps ax | grep -v grep | grep -q 'pidgin' ) && echo 'starting pidgin - skipped - already running' || pidgin", shell = true}
+-- autostart_config.icedove = {cmd = "icedove", screen = 1, tag = 1}
+-- autostart_config.pidgin = {cmd = "pidgin", screen = 2, tag = 8}
+-- autostart_config.synergy = {cmd = "killall -9 synergys ; synergys -n simon-linux --restart", shell = true}
+-- autostart_config.xscreensaver_hack = {cmd = "xscreensaver-command -watch | while read line ; do if ( echo $line | grep -q '^UNBLANK' ) ; then wakeonlan 00:1C:C0:8D:0C:73 ; origloc=`xdotool getmouselocation | sed 's|x:\(.*\)\ y:\(.*\)\ .*|\1 \2|g'` ; xdotool mousemove_relative -- -10000 0 ; sleep 0.1 ; xdotool mousemove_relative 1000 0 ; xdotool mousemove $origloc ; fi ; done", shell = true}
+-- autostart_config.quicksynergy = {cmd = "killall -9 quicksynergy ; quicksynergy &", shell = true}
+-- autostart_config.nmapplet = {cmd = "if ! ( ps ax | grep -v grep | grep -q 'nm-applet' ) ; then nm-applet ; fi", shell = true}
+-- autostart_config.xscreensaver = {cmd = "killall -9 xscreensaver 2>/dev/null ; xscreensaver -no-splash", shell = true}
 
 --- Application rule stuff - for every application raise.
 -- awful.rules.rules = {
