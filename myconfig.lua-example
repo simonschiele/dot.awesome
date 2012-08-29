@@ -37,7 +37,7 @@
 -- config.tag_font = "sans 8"
 
 --- Systray left/right of clock
--- config.systray_align = right
+-- config.systray_align = "right"
 
 --- Enable/Disable widgets
 -- config.obvious_clock = true 

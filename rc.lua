@@ -166,7 +166,6 @@ if config['obvious_exec'] then
     -- obvious.popup_run_prompt.set_slide(true)
 end
 
-config['obvious_ssh'] = true
 if config['obvious_ssh'] then
     require('popup_ssh_prompt')
 end
@@ -175,7 +174,7 @@ end
 
 -- {{{ Vicious 
 if config['vicious_cpu'] or config['vicious_mem'] or config['vicious_bat'] or config['vicious_net'] or config['vicious_wifi'] then
-    require('lib/vicious')
+    vicious = require('lib/vicious')
     beautiful.fg_widget        = "#AECF96"
     beautiful.fg_center_widget = "#88A175"
     beautiful.fg_end_widget    = "#FF5656"
@@ -184,6 +183,12 @@ if config['vicious_cpu'] or config['vicious_mem'] or config['vicious_bat'] or co
     beautiful.fg_netdn_widget  = beautiful.fg_urgent
     beautiful.bg_widget        = beautiful.bg_normal
     beautiful.border_widget    = beautiful.bg_normal
+    
+    if config['systray_align'] == 'right' then
+        clockicon = widget({ type = "imagebox", name = "clockicon" })
+        clockicon.image = image(beautiful.widget_date)
+        table.insert(widgets,clockicon)
+    end
 end   
 
 if config['vicious_bat'] then
@@ -483,7 +488,7 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey }, "r", config['obvious_exec'] and obvious.popup_run_prompt.run_prompt or function () mypromptbox[mouse.screen]:run() end),
     awful.key({ modkey }, "e", config['obvious_exec'] and obvious.popup_run_prompt.run_prompt or function () mypromptbox[mouse.screen]:run() end),
     
-    awful.key({ modkey }, "s", not config['obvious_ssh'] and obvious.popup_ssh_prompt.run_prompt or  
+    awful.key({ modkey }, "s", config['obvious_ssh'] == true and obvious.popup_ssh_prompt.run_prompt or  
             function ()
                 awful.prompt.run({ prompt = "SSH: " },
                 mypromptbox[mouse.screen].widget,
