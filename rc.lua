@@ -86,7 +86,7 @@ for s = 1, screen.count() do
     elseif config['tag_style'] == 'greek' then
         tagnames = {"λ","Ω","Δ","ε","ϰ","Ϭ","Ψ","Φ","ϖ"}
     elseif config['tag_style'] == 'braille' then
-        tagnames = {"⠁","⠃","⠉","⠙","⠑","⠋","⠛","⠓","⠊","⠚"}
+        tagnames = {"⠁","⠃","⠉","⠙","⠑","⠋","⠛","⠓","⠊"}
     else
         tagnames = {"1","2","3","4","5","6","7","8","9"}
     end
