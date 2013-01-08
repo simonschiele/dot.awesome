@@ -82,7 +82,7 @@ layouts =
 tags = {}
 for s = 1, screen.count() do
     if config['tag_style'] == 'fancy' then
-        tagnames = {"⚡","✇","☭","⌥","⌤","⍜","⌘","☼","☠"}
+        tagnames = {"⌂","⚡","✇","☭","★","⍜","⌘","☼","♫"}
     elseif config['tag_style'] == 'greek' then
         tagnames = {"λ","Ω","Δ","ε","ϰ","Ϭ","Ψ","Φ","ϖ"}
     elseif config['tag_style'] == 'braille' then
