@@ -1,11 +1,11 @@
--- path
-config_dir = os.getenv("HOME") .. "/.config/awesome"
-package.path = package.path .. ";" .. config_dir .. "/lib/?/init.lua;" .. config_dir .. "/lib/?.lua"
-
 -- Standard awesome library
 require('awful')
 require('awful.autofocus')
 require('awful.rules')
+
+-- path
+config_dir = awful.util.getdir("config")
+package.path = package.path .. ";" .. config_dir .. "/lib/?/init.lua;" .. config_dir .. "/lib/?.lua"
 
 -- Theme handling library
 require('beautiful')
