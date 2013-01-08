@@ -13,3 +13,6 @@
 [submodule "lib/awesompd"]
 	path = lib/awesompd
 	url = https://github.com/alexander-yakushev/awesompd.git
+[submodule "lib/blingbling"]
+	path = lib/blingbling
+	url = git://github.com/cedlemo/blingbling.git
