@@ -1,37 +1,54 @@
 
-This is our little awesome config. If you want to use it regulary and be able to update 
-from repo, create your own myconfig.lua (by copying myconfig.lua-example) and maybe you 
-want to put applications.lua in gitignore.
+# Simons awesome awesome config (-:
 
-you are welcome to use and improve this config set. 
-send patches to simon <simon.codingmonkey@googlemail.com>.
+This is my little awesome config. I tried to wrap a few of the most common awesome features into a simple config file.
 
+If you want to use it regulary and be able to update from repo, create your own myconfig.lua (by copying myconfig.lua-example) and maybe you want to put applications.lua in gitignore.
 
-Available clone paths:
-    * git://simon.psaux.de/awesome.git
-    * http://simon.psaux.de/git/awesome.git
-    * https://github.com/simonschiele/awesome.git
-    * ssh://git@psaux.de/awesome.git (send public key via email)
+you are very welcome to use and improve this config set. send patches, improvements or ideas to <simon.codingmonkey@googlemail.com>.
 
 
-Included subrepos:
-    * lib/obvious (http://git.mercenariesguild.net/?p=obvious.git;a=summary)
-    * lib/vicious (http://git.sysphere.org/vicious/)
-    * lib/flaw (https://github.com/dsoulayrol/flaw)
-    * lib/bashets (http://gitorious.org/bashets)
+## Available clone paths:
+ * git://simon.psaux.de/git/awesome.git
+ * http://simon.psaux.de/git/awesome.git
+ * ssh://git@simon.psaux.de/awesome.git (send public key via email for write access)
+
+Also on github:
+ * https://github.com/simonschiele/awesome.git
 
 
-Steps to get this config running:
+## Versions / Branches
+There are two active branches:
+
+ * master (for awesome 3.4)
+    Use this one for debian, ubuntu, ...
+
+ * v3.5 (for awesome 3.5)
+    Use this one for awesome from git, arch, ...
+
+
+## Included subrepos:
+ * lib/obvious (http://git.mercenariesguild.net/?p=obvious.git;a=summary)
+ * lib/vicious (http://git.sysphere.org/vicious/)
+ * lib/flaw (https://github.com/dsoulayrol/flaw)
+ * lib/bashets (http://gitorious.org/bashets)
+ * lib/blingbling (https://github.com/cedlemo/blingbling)
+
+
+## Usage / Setup:
     
     # Go in your config dir and move away old awesome-config:
     cd ~/.config/
     mv awesome/ awesome-old/
     
-    # Clone Repo (see 'clone paths' above):
-    git clone <clone-path>
-    cd awesome/
+    # Clone Repo for awesome 3.4 (see 'clone paths' above):
+    git clone <clone-path> awesome/
+    
+    # If you want config for awesome 3.5, checkout branch v3.5 instead:
+    git clone -b v3.5 <clone-path> awesome/
     
     # Checkout the submodules
+    cd awesome/
     git submodule init
     git submodule update
     
@@ -40,8 +57,8 @@ Steps to get this config running:
     vim myconfig.lua
 
 
-My Default Keysetting:
-    
+## My Default Keysetting:
+
     # "Windows" (aka clients)
     Mouse Btn 1 + Win/Alt       - Move window
     Mouse Btn 3 + Win/Alt       - Resize window
@@ -65,19 +82,28 @@ My Default Keysetting:
     Win + Shift + 1-9           - Move window to Tag 1-6
     Win + a                     - Move Cursor (and focus) to next screen
     Win + u                     - Jump to "urgent" (use with mail, IM, irc, ...)
-    
+
     # Prompts & Tools
+    Win + p                     - Menubar Launcher (>= awesome 3.5)
     Win + Enter                 - Terminal
     Win + e/r                   - execute cmd
     Win + Shift + e             - lua prompt
     Win + s                     - ssh
     Win + Shift + s             - ssh (with X11 forwarding)
     Win + F9                    - next keyboard layout (needs config switch)
-    Win + F11/F12                   - lock screen
+    Win + F11/F12               - lock screen
 
     # Awesome itself
     Win + Shift + r             - redraw awesome
     Win + Control + r           - restart awesome
     Win + Control + q           - quit awesome (back to dm/shell)
+
+
+## Authors
+
+**Simon Schiele**
+
+ * http://simon.psaux.de/
+ * mailto:<simon.codingmonkey@googlemail.com>
 
 
