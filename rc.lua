@@ -341,12 +341,6 @@ if config['flaw'] then
 end
 -- }}}
 
--- {{{ Awesompd
-if config['awesompd'] then
-    --    require('lib/awesompd')
-end
--- }}}
-
 -- {{{ Wibox
 -- Create a textclock widget
 if config['obvious_clock'] then
