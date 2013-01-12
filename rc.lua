@@ -54,8 +54,9 @@ space     = " "
 
 -- {{{ config stuff 
 
--- Don't change config values here!!! Create myconfig.lua and overwrite config there!
--- Possible config settings are well documented in the myconfig.lua-example
+-- Don't change config values here!!! These are just default values!!!
+-- Create ~/.config/awesome/myconfig.lua and overwrite config there!
+-- Possible config settings are well documented in ~/.config/awesome/myconfig.lua-example
 
 config = {}
 config['modkey'] = "Mod4"
@@ -351,6 +352,7 @@ end
 
 -- Create a wibox for each screen and add it
 mywibox = {}
+debugbox = widget({ type = "textbox", name = "debugbox" })
 mypromptbox = {}
 mylayoutbox = {}
 mytaglist = {}
@@ -434,6 +436,7 @@ for s = 1, screen.count() do
     local right_layout = wibox.layout.fixed.horizontal()
    
     if s == config['main_screen'] then
+        if config['debug'] == true then right_layout:add(debugbox) end
         table.insert(widgets, spacer)
         table.foreach(widgets, function(k,v) right_layout:add(v) end)
         if not config['systray_align'] or config['systray_align'] == 'left' then right_layout:add(wibox.widget.systray()) end
