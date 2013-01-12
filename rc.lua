@@ -21,8 +21,9 @@ require('lib/tools')
 
 -- {{{ config stuff 
 
--- Don't change config values here!!! Create myconfig.lua and overwrite config there!
--- Possible config settings are well documented in the myconfig.lua-example
+-- Don't change config values here!!! These are just default values!!!
+-- Create ~/.config/awesome/myconfig.lua and overwrite config there!
+-- Possible config settings are well documented in ~/.config/awesome/myconfig.lua-example
 
 config = {}
 config['modkey'] = "Mod4"
@@ -316,6 +317,9 @@ end
 -- Create a systray
 systray = widget({ type = "systray" })
 
+-- Debug box  
+debugbox = widget({ type = "textbox", name = "debugbox" })
+
 -- Different Boxes 
 mywibox = {}
 mypromptbox = {}
@@ -406,6 +410,7 @@ for s = 1, screen.count() do
         s == config['main_screen'] and (not config['systray_align'] or config['systray_align'] == 'left') and systray or nil,
         s == config['main_screen'] and widgets or nil,
         
+        s == config['main_screen'] and config['debug'] == true and debugbox or nil,
         config['taskbar'] ~= 'bottom' and config['taskbar'] ~= 'off' and dspacer,
         config['taskbar'] ~= 'bottom' and config['taskbar'] ~= 'off' and mytasklist[s],
         
