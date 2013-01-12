@@ -352,7 +352,7 @@ end
 
 -- Create a wibox for each screen and add it
 mywibox = {}
-debugbox = widget({ type = "textbox", name = "debugbox" })
+debugbox = wibox.widget.textbox()
 mypromptbox = {}
 mylayoutbox = {}
 mytaglist = {}
