@@ -8,7 +8,8 @@
 
 -- {{{ Main
 theme = {}
-theme.wallpaper_cmd = { "awsetbg " .. os.getenv("HOME") .. "/.config/awesome/themes/zenburn/zenburn-background.png" }
+theme.wallpaper = os.getenv("HOME") .. "/.config/awesome/themes/zenburn/zenburn-background.png"
+theme.wallpaper_cmd = "awsetbg " .. theme.wallpaper
 -- }}}
 
 -- {{{ Styles

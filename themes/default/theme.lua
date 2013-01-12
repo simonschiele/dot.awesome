@@ -82,7 +82,8 @@ theme.titlebar_maximized_button_normal_active = os.getenv("HOME") .. "/.config/a
 theme.titlebar_maximized_button_focus_active  = os.getenv("HOME") .. "/.config/awesome/themes/default/titlebar/maximized_focus_active.png"
 
 -- You can use your own command to set your wallpaper
-theme.wallpaper_cmd = { "awsetbg " .. os.getenv("HOME") .. "/.config/awesome/themes/default/background.png" }
+theme.wallpaper = os.getenv("HOME") .. "/.config/awesome/themes/default/background.png"
+theme.wallpaper_cmd = "awsetbg " .. theme.wallpaper
 
 -- You can use your own layout icons like this:
 theme.layout_fairh = os.getenv("HOME") .. "/.config/awesome/themes/default/layouts/fairhw.png"

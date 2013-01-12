@@ -1,5 +1,5 @@
 
-function autostart(autostart_config)
+function autostart(awful, autostart_config)
     if not autostart_config then
         do return nil end
     end
@@ -43,7 +43,7 @@ function exists(filename)
       end
 end
 
-function multifullscreen(c)
+function multifullscreen(awful, c)
     awful.client.floating.toggle(c)
     if awful.client.floating.get(c) then
         local clientX = screen[1].workarea.x

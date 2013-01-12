@@ -4,6 +4,7 @@ terminal_exec = terminal .. " -e "
 
 editor = "vim"
 xeditor = terminal_exec .. editor
+editor_cmd = terminal_exec .. editor
 
 su = "sudo"
 xsu = "gksudo"
@@ -19,7 +20,7 @@ mixer = "pavucontrol"
 
 
 -- Menu
-function get_mainmenu()
+function get_mainmenu(awful)
     
     awesomemenu = {
         { "lock screen", screen_lock },
