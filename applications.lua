@@ -8,19 +8,18 @@ xeditor = terminal_exec .. editor
 su = "sudo"
 xsu = "gksudo"
 
-ssh_cmd = "ssh -v" 
+ssh_cmd = "ssh -v"
 
 screen_lock = "xscreensaver-command --lock"
-browser = "iceweasel" 
+browser = "google-chrome"
 mailer = "icedove"
 filer = "thunar"
 sysconfig = "gnome-control-center"
 mixer = "pavucontrol"
 
-
 -- Menu
 function get_mainmenu()
-    
+
     awesomemenu = {
         { "lock screen", screen_lock },
         { "restart", awesome.restart },
@@ -29,16 +28,18 @@ function get_mainmenu()
 
     internetmenu = {
         { "browser", browser },
-        { "chrome", "google-chrome" },
         { "mailer", mailer },
         { "irc", "irc" },
         { "pidgin", "pidgin" },
+        { "iceweasel", "iceweasel" },
+        { "chrome", "google-chrome" },
     }
 
     multimediamenu = {
         { "mixer", mixer },
         { "gmpc", "gmpc" },
         { "webcam", "guvcview" },
+        { "picard", "picard" },
     }
 
     utilsmenu = {
@@ -54,14 +55,7 @@ function get_mainmenu()
     }
 
     gamesmenu = {
-        { "sauerbraten", "sauerbraten" },
-        { "warsow", "warsow" },
-        { "wormux", "wormux" },
-        { "singularity", "singularity" },
-        { "warzone2100", "warzone2100" },
         { "dwarf fortress", "/usr/local/games/df_linux/df" },
-        { "Titans Revenge", "/opt/revengeofthetitans/revenge.sh" },
-        { "World of Goo", "/usr/local/games/WorldOfGoo/WorldOfGoo" },
     }
 
     graphicsmenu = {
@@ -69,7 +63,7 @@ function get_mainmenu()
         { "inkscape", "inkscape" },
         { "geeqie", "geeqie" },
     }
-     
+
     officemenu = {
         { "libre writer", "libreoffice -writer"},
         { "libre calc", "libreoffice -calc"},
@@ -78,7 +72,7 @@ function get_mainmenu()
         { "gnumeric", "gnumeric" },
     }
 
-    menu = awful.menu({ items =   { 
+    menu = awful.menu({ items =   {
         { "browser", browser },
         { "terminal", terminal },
         { "sysconfig", sysconfig },
@@ -93,7 +87,7 @@ function get_mainmenu()
         { " ", "echo -n" },
         { "awesome", awesomemenu },
     }})
-    
+
     return menu
 
 end
