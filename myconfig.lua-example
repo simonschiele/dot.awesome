@@ -1,12 +1,12 @@
 
---- Modkey is your main modifier key. you get ~50 keybindings. 
+--- Modkey is your main modifier key. you get ~50 keybindings.
 --- it's wise to use the window(s) (Mod4) key for most stuff
--- config.modkey = "Mod4" 
+-- config.modkey = "Mod4"
 
 --- Mod1 == Alt Key - only used optional for window handling and app switching
--- config.altkey = "Mod1" 
+-- config.altkey = "Mod1"
 
---- Screen for systray and widgets 
+--- Screen for systray and widgets
 -- config.main_screen = 2
 
 --- optimize for small screens and low resolutions like on netbooks
@@ -17,16 +17,18 @@
 -- config.taskbar = "top"            -- taskbar inside top bar ('awesome default')
 -- config.taskbar = "off" | false    -- no tasklist at all
 
---- Choose a different theme (best use only themes delivered with this repo. if not, check if the widget colors are available) 
+--- Choose a different theme. Themes are included via a subrepo from https://github.com/mikar/awesome-themes
+--- and https://github.com/Morley93/awesome-themes-3.5. Have a look at the github pages for an Overview.
+--- There is a default themes delivered with this config. For fallback purchases.
 -- config.theme = "default"
--- config.theme = "zenburn"
+-- config.theme = "dust"
 
 --- Set font for menus, tasklist, tagnames, ...
 -- config.font = "sans 8"
 
---- If not set, Tags are named by number. If one of the Options gets used, 
+--- If not set, Tags are named by number. If one of the Options gets used,
 --- you will have fancy unicode signs as Tag Names.
--- config.tag_style = "fancy"  
+-- config.tag_style = "fancy"
 -- config.tag_style = "greek"
 -- config.tag_style = "braille"
 
@@ -40,16 +42,16 @@
 -- config.systray_align = "right"
 
 --- Enable/Disable widgets
--- config.obvious_clock = true 
--- config.obvious_exec = true 
--- config.obvious_ssh = true 
--- config.vicious_cpu = true 
--- config.vicious_mem = true 
--- config.vicious_bat = true 
--- config.vicious_net = true 
--- config.vicious_wifi = true 
+-- config.obvious_clock = true
+-- config.obvious_exec = true
+-- config.obvious_ssh = true
+-- config.vicious_cpu = true
+-- config.vicious_mem = true
+-- config.vicious_bat = true
+-- config.vicious_net = true
+-- config.vicious_wifi = true
 
--- Widget for switching keyboard layout. Don't forget to configure your languages. 
+-- Widget for switching keyboard layout. Don't forget to configure your languages.
 -- First one will be default. Default keymapping for switch is Win+F9
 -- config.kbdcfg = true
 -- config.kbdcfg_languages = {{ "us", "" },{ "de", ""},{ "ru", "winkeys"}}

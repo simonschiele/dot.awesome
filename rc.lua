@@ -19,7 +19,7 @@ require('applications')
 -- Load lib/tools.lua, a few helper and functions this config needs to work
 require('lib/tools')
 
--- {{{ config stuff 
+-- {{{ config stuff
 
 -- Don't change config values here!!! These are just default values!!!
 -- Create ~/.config/awesome/myconfig.lua and overwrite config there!
@@ -41,7 +41,7 @@ modkey = config['modkey']
 altkey = config['altkey']
 
 if not config['main_screen'] or config['main_screen'] > screen.count() then
-    config['main_screen'] = 1    
+    config['main_screen'] = 1
 end
 
 -- }}}
@@ -49,31 +49,37 @@ end
 -- {{{ Set Theme
 if not config['theme'] then
     config['theme'] = "default"
+    theme = config_dir .. '/themes-fallback/' .. config['theme'] .. '/theme.lua'
+elseif config['theme'] == 'default' or config['theme'] == 'zenburn' then
+    theme = config_dir .. '/themes-fallback/' .. config['theme'] .. '/theme.lua'
+else
+    theme = config_dir .. '/themes/' .. config['theme'] .. '/theme.lua'
 end
-theme = config_dir .. '/themes/' .. config['theme'] .. '/theme.lua'
 
-if not exists(theme) then
-    theme = "/usr/share/awesome/themes/default/theme.lua" 
+if not exists(theme) and exists("/usr/share/awesome/themes/default/theme.lua") then
+    theme = "/usr/share/awesome/themes/default/theme.lua"
+elseif not exists(theme) and exists("/usr/local/share/awesome/themes/default/theme.lua") then
+    theme = "/usr/local/share/awesome/themes/default/theme.lua"
 end
 
 beautiful.init(theme)
 -- }}}
 
--- {{{ Layouts 
+-- {{{ Layouts
 -- Table of layouts to cover with awful.layout.inc, order matters.
 layouts =
 {
     awful.layout.suit.floating,
     awful.layout.suit.tile,
-    -- awful.layout.suit.tile.left,
+    awful.layout.suit.tile.left,
     awful.layout.suit.tile.bottom,
-    -- awful.layout.suit.tile.top,
+    awful.layout.suit.tile.top,
     awful.layout.suit.fair,
-    -- awful.layout.suit.fair.horizontal,
-    -- awful.layout.suit.spiral,
-    -- awful.layout.suit.spiral.dwindle,
-    -- awful.layout.suit.max,
-    -- awful.layout.suit.max.fullscreen,
+    awful.layout.suit.fair.horizontal,
+    awful.layout.suit.spiral,
+    awful.layout.suit.spiral.dwindle,
+    awful.layout.suit.max,
+    awful.layout.suit.max.fullscreen,
     awful.layout.suit.magnifier
 }
 -- }}}
@@ -91,15 +97,15 @@ for s = 1, screen.count() do
     else
         tagnames = {"1","2","3","4","5","6","7","8","9"}
     end
-    
+
     if not config['tag_count'] then
         if config['small_screen'] then
-            config['tag_count'] = 4 
+            config['tag_count'] = 4
         else
-            config['tag_count'] = 7 
+            config['tag_count'] = 7
         end
     end
-    
+
     for i = 1, 9 - config['tag_count'] do
         table.remove(tagnames)
     end
@@ -121,38 +127,38 @@ separator.text  = "|"               -- " syntaxhighlite-fix
 space           = " "
 -- }}}
 
--- {{{ Plain Widgets 
+-- {{{ Plain Widgets
 if config['kbdcfg'] then
     kbdcfg = {}
     kbdcfg.cmd = "setxkbmap"
     if not config['kbdcfg_languages'] then
         kbdcfg.layout = {{ "de", "" },{ "us", ""},{ "ru", "winkeys"}}
     else
-        kbdcfg.layout = config['kbdcfg_languages'] 
+        kbdcfg.layout = config['kbdcfg_languages']
     end
     kbdcfg.current = 1
     kbdcfg.widget = widget({ type = "textbox", align = "right" })
     kbdcfg.widget.text = space .. string.upper(kbdcfg.layout[kbdcfg.current][1]) .. space
-    
+
     kbdcfg.switch = function ()
         kbdcfg.current = kbdcfg.current % #(kbdcfg.layout) + 1
         local t = kbdcfg.layout[kbdcfg.current]
         kbdcfg.widget.text = ' ' .. string.upper(t[1]) .. ' '
         awful.util.spawn(kbdcfg.cmd .. " " .. t[1] .. " " .. t[2])
     end
-    
+
     kbdcfg.widget:buttons(awful.util.table.join(
         awful.button({ }, 1, function () kbdcfg.switch() end)
     ))
-    
+
     local t = kbdcfg.layout[kbdcfg.current]
     awful.util.spawn(kbdcfg.cmd .. " " .. t[1] .. " " .. t[2])
 
-    table.insert(widgets,kbdcfg.widget) 
+    table.insert(widgets,kbdcfg.widget)
 end
 -- }}}
 
--- {{{ Obvious 
+-- {{{ Obvious
 if config['obvious_clock'] then
     require('obvious.clock')
     obvious.clock.set_editor(xeditor)
@@ -184,19 +190,19 @@ if config['vicious_cpu'] or config['vicious_mem'] or config['vicious_bat'] or co
     beautiful.fg_netdn_widget  = beautiful.fg_urgent
     beautiful.bg_widget        = beautiful.bg_normal
     beautiful.border_widget    = beautiful.bg_normal
-    
+
     if config['systray_align'] == 'right' then
         clockicon = widget({ type = "imagebox", name = "clockicon" })
         clockicon.image = image(beautiful.widget_date)
         table.insert(widgets,clockicon)
     end
-end   
+end
 
 if config['vicious_bat'] then
     baticon = widget({ type = "imagebox", name = "baticon" })
     baticon.image = image(beautiful.widget_bat)
     batwidget = widget({ type = "textbox", name = "batwidget" })
-    
+
     vicious.register(batwidget, vicious.widgets.bat, "$1$2%", 61, "BAT0")
     table.insert(widgets,dspacer)
     table.insert(widgets,batwidget)
@@ -214,7 +220,7 @@ if config['vicious_mem'] then
     memwidget:set_color('#FF5656')
     memwidget:set_gradient_colors({ '#FF5656', '#88A175', '#AECF96' })
     -- vicious.enable_caching(vicious.widgets.mem)
-    
+
     vicious.register(memwidget, vicious.widgets.mem, "$1", 13)
     table.insert(widgets,dspacer)
     table.insert(widgets,memwidget.widget)
@@ -235,18 +241,18 @@ if config['vicious_cpu'] then
     cpuwidget:set_color("#FF5656")
     cpuwidget:set_gradient_colors({ "#FF5656", "#88A175", "#AECF96" })
     --  cpuwidget:set_max_value(200)
-    
+
     vicious.register(cpuwidget, vicious.widgets.cpu, '$1', 3)
     table.insert(widgets,dspacer)
     table.insert(widgets,cpuwidget.widget)
     table.insert(widgets,cpuicon)
 end
-    
+
 if config['vicious_wifi'] then
     if not config['device_wireless'] then
         config['device_wireless'] = 'wlan0'
-    end 
-    
+    end
+
     wifiicon = widget({ type = "imagebox", name = "wifiicon" })
     wifiicon.image = image(beautiful.widget_wifi)
     neticon = widget({ type = "imagebox", name = "neticon" })
@@ -255,23 +261,22 @@ if config['vicious_wifi'] then
     neticonup.image = image(beautiful.widget_netup)
     netfiwidget = widget({ type = "textbox", name = "netfiwidget" })
     --vicious.enable_caching(vicious.widgets.net)
-    
+
     vicious.register(netfiwidget, vicious.widgets.net, '<span color="'
         .. beautiful.fg_netdn_widget ..'">${'.. config['device_wireless'] ..' down_kb}</span> <span color="'
         .. beautiful.fg_netup_widget ..'">${'.. config['device_wireless'] ..' up_kb}</span>', 3)
-    table.insert(widgets,dspacer) 
-    table.insert(widgets,neticonup) 
-    table.insert(widgets,netfiwidget) 
-    table.insert(widgets,neticon) 
-    table.insert(widgets,wifiicon) 
+    table.insert(widgets,dspacer)
+    table.insert(widgets,neticonup)
+    table.insert(widgets,netfiwidget)
+    table.insert(widgets,neticon)
+    table.insert(widgets,wifiicon)
 end
-    
-        
+
 if config['vicious_net'] then
     if not config['device_wired'] then
         config['device_wired'] = 'eth0'
-    end 
-    
+    end
+
     ethericon = widget({ type = "imagebox", name = "ethericon" })
     ethericon.image = image(beautiful.widget_rss)
     neticon = widget({ type = "imagebox", name = "neticon" })
@@ -280,28 +285,15 @@ if config['vicious_net'] then
     neticonup.image = image(beautiful.widget_netup)
     netwidget = widget({ type = "textbox", name = "netwidget" })
     --vicious.enable_caching(vicious.widgets.net)
-    
+
     vicious.register(netwidget, vicious.widgets.net, '<span color="'
         .. beautiful.fg_netdn_widget ..'">${'.. config['device_wired'] ..' down_kb}</span> <span color="'
         .. beautiful.fg_netup_widget ..'">${'.. config['device_wired'] ..' up_kb}</span>', 3)
-    table.insert(widgets,dspacer) 
-    table.insert(widgets,neticonup) 
-    table.insert(widgets,netwidget) 
-    table.insert(widgets,neticon) 
-    table.insert(widgets,ethericon) 
-    
-end
--- }}}
-
--- {{{ Bashets 
-if config['bashets'] then
-    --    require('lib/bashets')
-end
--- }}}
-
--- {{{ Flaw
-if config['flaw'] then
-    --    require('lib/flaw')
+    table.insert(widgets,dspacer)
+    table.insert(widgets,neticonup)
+    table.insert(widgets,netwidget)
+    table.insert(widgets,neticon)
+    table.insert(widgets,ethericon)
 end
 -- }}}
 
