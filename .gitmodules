@@ -13,3 +13,6 @@
 [submodule "lib/blingbling"]
 	path = lib/blingbling
 	url = git://github.com/cedlemo/blingbling.git
+[submodule "themes"]
+	path = themes
+	url = https://github.com/Morley93/awesome-themes-3.5

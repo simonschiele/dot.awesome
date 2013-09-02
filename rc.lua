@@ -82,11 +82,17 @@ end
 -- {{{ Set Theme
 if not config['theme'] then
     config['theme'] = "default"
+    theme = config_dir .. '/themes-fallback/' .. config['theme'] .. '/theme.lua'
+elseif config['theme'] == 'default' or config['theme'] == 'zenburn' then
+    theme = config_dir .. '/themes-fallback/' .. config['theme'] .. '/theme.lua'
+else
+    theme = config_dir .. '/themes/' .. config['theme'] .. '/theme.lua'
 end
-theme = config_dir .. '/themes/' .. config['theme'] .. '/theme.lua'
 
-if not exists(theme) then
-    theme = "/usr/share/awesome/themes/default/theme.lua" 
+if not exists(theme) and exists("/usr/share/awesome/themes/default/theme.lua") then
+    theme = "/usr/share/awesome/themes/default/theme.lua"
+elseif not exists(theme) and exists("/usr/local/share/awesome/themes/default/theme.lua") then
+    theme = "/usr/local/share/awesome/themes/default/theme.lua"
 end
 
 beautiful.init(theme)
