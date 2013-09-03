@@ -82,8 +82,9 @@ end
 -- {{{ Set Theme
 if not config['theme'] then
     config['theme'] = "default"
-    theme = config_dir .. '/themes-fallback/' .. config['theme'] .. '/theme.lua'
-elseif config['theme'] == 'default' or config['theme'] == 'zenburn' then
+end
+
+if config['theme'] == 'default' or config['theme'] == 'zenburn' then
     theme = config_dir .. '/themes-fallback/' .. config['theme'] .. '/theme.lua'
 else
     theme = config_dir .. '/themes/' .. config['theme'] .. '/theme.lua'
@@ -95,7 +96,24 @@ elseif not exists(theme) and exists("/usr/local/share/awesome/themes/default/the
     theme = "/usr/local/share/awesome/themes/default/theme.lua"
 end
 
+saveconfig = config
 beautiful.init(theme)
+beautiful.widget_cpu    = os.getenv("HOME") .. "/.config/awesome/themes-fallback/default/icons/cpu.png"
+beautiful.widget_bat    = os.getenv("HOME") .. "/.config/awesome/themes-fallback/default/icons/bat.png"
+beautiful.widget_mem    = os.getenv("HOME") .. "/.config/awesome/themes-fallback/default/icons/mem.png"
+beautiful.widget_fs     = os.getenv("HOME") .. "/.config/awesome/themes-fallback/default/icons/disk.png"
+beautiful.widget_net    = os.getenv("HOME") .. "/.config/awesome/themes-fallback/default/icons/down.png"
+beautiful.widget_netup  = os.getenv("HOME") .. "/.config/awesome/themes-fallback/default/icons/up.png"
+beautiful.widget_mail   = os.getenv("HOME") .. "/.config/awesome/themes-fallback/default/icons/mail.png"
+beautiful.widget_vol    = os.getenv("HOME") .. "/.config/awesome/themes-fallback/default/icons/vol.png"
+beautiful.widget_org    = os.getenv("HOME") .. "/.config/awesome/themes-fallback/default/icons/cal.png"
+beautiful.widget_date   = os.getenv("HOME") .. "/.config/awesome/themes-fallback/default/icons/time.png"
+beautiful.widget_crypto = os.getenv("HOME") .. "/.config/awesome/themes-fallback/default/icons/crypto.png"
+beautiful.widget_wifi   = os.getenv("HOME") .. "/.config/awesome/themes-fallback/default/icons/wifi.png"
+beautiful.widget_rss    = os.getenv("HOME") .. "/.config/awesome/themes-fallback/default/icons/rss.png"
+beautiful.awesome_icon = os.getenv("HOME") .. "/.config/awesome/themes-fallback/default/awesome16.png"
+config = saveconfig
+
 -- }}}
 
 -- {{{ Layouts 
@@ -138,15 +156,15 @@ for s = 1, screen.count() do
     else
         tagnames = {"1","2","3","4","5","6","7","8","9"}
     end
-    
+
     if not config['tag_count'] then
         if config['small_screen'] then
-            config['tag_count'] = 4 
+            config['tag_count'] = 4
         else
-            config['tag_count'] = 7 
+            config['tag_count'] = 7
         end
     end
-    
+
     for i = 1, 9 - config['tag_count'] do
         table.remove(tagnames)
     end
@@ -494,7 +512,7 @@ globalkeys = awful.util.table.join(
             awful.client.focus.byidx(-1)
             if client.focus then client.focus:raise() end
         end),
-    awful.key({ modkey,           }, "w", function () mymainmenu:show() end),
+    awful.key({ modkey,           }, "w", function () menu:show() end),
 
     -- Layout manipulation
     awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1)    end),
@@ -648,7 +666,7 @@ root.keys(globalkeys)
 
 -- {{{ Mouse bindings
 root.buttons(awful.util.table.join(
-    awful.button({ }, 3, function () mymainmenu:toggle() end),
+    awful.button({ }, 3, function () menu:toggle() end),
     awful.button({ }, 4, awful.tag.viewnext),
     awful.button({ }, 5, awful.tag.viewprev)
 ))
