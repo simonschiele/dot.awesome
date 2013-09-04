@@ -8,25 +8,25 @@ If you want to use it regulary and be able to update this config, create your ow
 you are very welcome to use and improve this config set. send patches, improvements or ideas to [<simon.codingmonkey@googlemail.com>](mailto:simon.codingmonkey@googlemail.com "mailto:simon.codingmonkey@googlemail.com").
 
 ## Available clone paths:
-    * [https://github.com/simonschiele/awesome.git](https://github.com/simonschiele/awesome.git "view repo on github")
-    * [http://simon.psaux.de/git/awesome.git](http://simon.psaux.de/git/awesome.git "view repo on simons cgit")
-    * ssh://git@simon.psaux.de/awesome.git (send public key via [email](mailto:simon.codingmonkey@googlemail.com "mailto:simon.codingmonkey@googlemail.com") for write access)
+ * [https://github.com/simonschiele/awesome.git](https://github.com/simonschiele/awesome.git "view repo on github")
+ * [http://simon.psaux.de/git/awesome.git](http://simon.psaux.de/git/awesome.git "view repo on simons cgit")
+ * ssh://git@simon.psaux.de/awesome.git (send public key via [email](mailto:simon.codingmonkey@googlemail.com "mailto:simon.codingmonkey@googlemail.com") for write access)
 
 ## Versions / Branches
 There are two active branches:
 
-    * [master](https://github.com/simonschiele/awesome "master branch on github") (for awesome 3.4)
-      Use this one for debian, ubuntu, ...
-    * [v3.5](https://github.com/simonschiele/awesome/tree/v3.5 "v3.5 branch on github") (for awesome 3.5) 
-      Use this one for awesome from git, arch, debian experimental,...
+ * [master](https://github.com/simonschiele/awesome "master branch on github") (for awesome 3.4)
+   Use this one for debian, ubuntu, ...
+ * [v3.5](https://github.com/simonschiele/awesome/tree/v3.5 "v3.5 branch on github") (for awesome 3.5) 
+   Use this one for awesome from git, arch, debian experimental,...
 
 ## Included subrepos:
- * lib/obvious (http://git.mercenariesguild.net/?p=obvious.git;a=summary)
- * lib/vicious (http://git.sysphere.org/vicious/)
- * lib/flaw (https://github.com/dsoulayrol/flaw)
- * lib/bashets (http://gitorious.org/bashets)
- * lib/blingbling (https://github.com/cedlemo/blingbling)
-
+* lib/obvious (http://git.mercenariesguild.net/?p=obvious.git;a=summary)
+* lib/vicious (http://git.sysphere.org/vicious/)
+* lib/flaw (https://github.com/dsoulayrol/flaw)
+* lib/bashets (http://gitorious.org/bashets)
+* lib/blingbling (https://github.com/cedlemo/blingbling)
+* themes/ (https://github.com/mikar/awesome-themes.git)
 
 ## Usage / Setup:
     
