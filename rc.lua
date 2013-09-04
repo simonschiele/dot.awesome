@@ -52,7 +52,7 @@ separator = wibox.widget.textbox("|")
 space     = " "
 -- }}}
 
--- {{{ config stuff 
+-- {{{ config stuff
 
 -- Don't change config values here!!! These are just default values!!!
 -- Create ~/.config/awesome/myconfig.lua and overwrite config there!
@@ -74,7 +74,7 @@ modkey = config['modkey']
 altkey = config['altkey']
 
 if not config['main_screen'] or config['main_screen'] > screen.count() then
-    config['main_screen'] = 1    
+    config['main_screen'] = 1
 end
 
 -- }}}
@@ -96,27 +96,34 @@ elseif not exists(theme) and exists("/usr/local/share/awesome/themes/default/the
     theme = "/usr/local/share/awesome/themes/default/theme.lua"
 end
 
+local widget_icons = {}
+widget_icons.widget_cpu    = os.getenv("HOME") .. "/.config/awesome/themes-fallback/default/icons/cpu.png"
+widget_icons.widget_bat    = os.getenv("HOME") .. "/.config/awesome/themes-fallback/default/icons/bat.png"
+widget_icons.widget_mem    = os.getenv("HOME") .. "/.config/awesome/themes-fallback/default/icons/mem.png"
+widget_icons.widget_fs     = os.getenv("HOME") .. "/.config/awesome/themes-fallback/default/icons/disk.png"
+widget_icons.widget_net    = os.getenv("HOME") .. "/.config/awesome/themes-fallback/default/icons/down.png"
+widget_icons.widget_netup  = os.getenv("HOME") .. "/.config/awesome/themes-fallback/default/icons/up.png"
+widget_icons.widget_mail   = os.getenv("HOME") .. "/.config/awesome/themes-fallback/default/icons/mail.png"
+widget_icons.widget_vol    = os.getenv("HOME") .. "/.config/awesome/themes-fallback/default/icons/vol.png"
+widget_icons.widget_org    = os.getenv("HOME") .. "/.config/awesome/themes-fallback/default/icons/cal.png"
+widget_icons.widget_date   = os.getenv("HOME") .. "/.config/awesome/themes-fallback/default/icons/time.png"
+widget_icons.widget_crypto = os.getenv("HOME") .. "/.config/awesome/themes-fallback/default/icons/crypto.png"
+widget_icons.widget_wifi   = os.getenv("HOME") .. "/.config/awesome/themes-fallback/default/icons/wifi.png"
+widget_icons.widget_rss    = os.getenv("HOME") .. "/.config/awesome/themes-fallback/default/icons/rss.png"
+
 saveconfig = config
 beautiful.init(theme)
-beautiful.widget_cpu    = os.getenv("HOME") .. "/.config/awesome/themes-fallback/default/icons/cpu.png"
-beautiful.widget_bat    = os.getenv("HOME") .. "/.config/awesome/themes-fallback/default/icons/bat.png"
-beautiful.widget_mem    = os.getenv("HOME") .. "/.config/awesome/themes-fallback/default/icons/mem.png"
-beautiful.widget_fs     = os.getenv("HOME") .. "/.config/awesome/themes-fallback/default/icons/disk.png"
-beautiful.widget_net    = os.getenv("HOME") .. "/.config/awesome/themes-fallback/default/icons/down.png"
-beautiful.widget_netup  = os.getenv("HOME") .. "/.config/awesome/themes-fallback/default/icons/up.png"
-beautiful.widget_mail   = os.getenv("HOME") .. "/.config/awesome/themes-fallback/default/icons/mail.png"
-beautiful.widget_vol    = os.getenv("HOME") .. "/.config/awesome/themes-fallback/default/icons/vol.png"
-beautiful.widget_org    = os.getenv("HOME") .. "/.config/awesome/themes-fallback/default/icons/cal.png"
-beautiful.widget_date   = os.getenv("HOME") .. "/.config/awesome/themes-fallback/default/icons/time.png"
-beautiful.widget_crypto = os.getenv("HOME") .. "/.config/awesome/themes-fallback/default/icons/crypto.png"
-beautiful.widget_wifi   = os.getenv("HOME") .. "/.config/awesome/themes-fallback/default/icons/wifi.png"
-beautiful.widget_rss    = os.getenv("HOME") .. "/.config/awesome/themes-fallback/default/icons/rss.png"
-beautiful.awesome_icon = os.getenv("HOME") .. "/.config/awesome/themes-fallback/default/awesome16.png"
+for key,val in pairs(widget_icons) do
+    print("key " .. key);
+    if not beautiful[key] ~= nil then
+        beautiful[key] = val
+    end
+end
 config = saveconfig
 
 -- }}}
 
--- {{{ Layouts 
+-- {{{ Layouts
 -- Table of layouts to cover with awful.layout.inc, order matters.
 local layouts =
 {
@@ -176,7 +183,7 @@ end
 mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon, menu = get_mainmenu(awful) })
 -- }}}
 
--- {{{ Separators
+-- {{{ Separator
 spacer    = wibox.widget.textbox(" ")
 dspacer   = wibox.widget.textbox("  ")
 separator = wibox.widget.textbox("|")
@@ -187,39 +194,39 @@ space     = " "
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
 -- }}}
 
--- {{{ Plain Widgets 
+-- {{{ Plain Widgets
 if config['kbdcfg'] then
     kbdcfg = {}
     kbdcfg.cmd = "setxkbmap"
     if not config['kbdcfg_languages'] then
         kbdcfg.layout = {{ "de", "" },{ "us", ""},{ "ru", "winkeys"}}
     else
-        kbdcfg.layout = config['kbdcfg_languages'] 
+        kbdcfg.layout = config['kbdcfg_languages']
     end
     kbdcfg.current = 1
     kbdcfg.widget = wibox.widget.textbox()
     kbdcfg.widget:set_text(space .. string.upper(kbdcfg.layout[kbdcfg.current][1]) .. space)
-        
+
     kbdcfg.switch = function ()
         kbdcfg.current = kbdcfg.current % #(kbdcfg.layout) + 1
         local t = kbdcfg.layout[kbdcfg.current]
         kbdcfg.widget:set_text(space .. string.upper(t[1]) .. space)
         awful.util.spawn(kbdcfg.cmd .. " " .. t[1] .. " " .. t[2])
     end
-    
+
     kbdcfg.widget:buttons(awful.util.table.join(
         awful.button({ }, 1, function () kbdcfg.switch() end)
     ))
-    
+
     local t = kbdcfg.layout[kbdcfg.current]
     awful.util.spawn(kbdcfg.cmd .. " " .. t[1] .. " " .. t[2])
 
-    table.insert(widgets,kbdcfg.widget) 
-    table.insert(widgets,spacer) 
+    table.insert(widgets,kbdcfg.widget)
+    table.insert(widgets,spacer)
 end
 -- }}}
 
--- {{{ Obvious 
+-- {{{ Obvious
 if config['obvious_clock'] then
     require('obvious.clock')
     obvious.clock.set_editor(xeditor)
@@ -240,7 +247,7 @@ end
 
 -- }}}
 
--- {{{ Vicious 
+-- {{{ Vicious
 if config['vicious_cpu'] or config['vicious_mem'] or config['vicious_bat'] or config['vicious_net'] or config['vicious_wifi'] then
     vicious = require('lib/vicious')
     beautiful.fg_widget        = "#AECF96"
@@ -251,14 +258,14 @@ if config['vicious_cpu'] or config['vicious_mem'] or config['vicious_bat'] or co
     beautiful.fg_netdn_widget  = beautiful.fg_urgent
     beautiful.bg_widget        = beautiful.bg_normal
     beautiful.border_widget    = beautiful.bg_normal
-    
-end   
+
+end
 
 if config['vicious_bat'] then
     baticon = wibox.widget.imagebox()
     baticon:set_image(beautiful.widget_bat)
     batwidget = wibox.widget.textbox()
-    
+
     vicious.register(batwidget, vicious.widgets.bat, "$1$2%", 61, "BAT0")
     table.insert(widgets, dspacer)
     table.insert(widgets, baticon)
@@ -276,7 +283,7 @@ if config['vicious_mem'] then
     memwidget:set_color('#FF5656')
     -- memwidget:set_gradient_colors({ '#FF5656', '#88A175', '#AECF96' }) -- TODO
     -- vicious.enable_caching(vicious.widgets.mem)
-    
+
     vicious.register(memwidget, vicious.widgets.mem, "$1", 13)
     table.insert(widgets, dspacer)
     table.insert(widgets, memicon)
@@ -297,18 +304,18 @@ if config['vicious_cpu'] then
     cpuwidget:set_color("#FF5656")
     -- cpuwidget:set_gradient_colors({ "#FF5656", "#88A175", "#AECF96" }) -- TODO
     -- cpuwidget:set_max_value(200)
-    
+
     vicious.register(cpuwidget, vicious.widgets.cpu, '$1', 3)
     table.insert(widgets, dspacer)
     table.insert(widgets, cpuicon)
     table.insert(widgets, cpuwidget)
 end
-    
+
 if config['vicious_wifi'] then
     if not config['device_wireless'] then
         config['device_wireless'] = 'wlan0'
-    end 
-     
+    end
+
     wifiicon = wibox.widget.imagebox()
     wifiicon:set_image(beautiful.widget_wifi)
     neticon = wibox.widget.imagebox()
@@ -317,23 +324,23 @@ if config['vicious_wifi'] then
     neticonup:set_image(beautiful.widget_netup)
     netfiwidget = wibox.widget.textbox()
     --vicious.enable_caching(vicious.widgets.net)
-    
+
     vicious.register(netfiwidget, vicious.widgets.net, '<span color="'
         .. beautiful.fg_netdn_widget ..'">${'.. config['device_wireless'] ..' down_kb}</span> <span color="'
         .. beautiful.fg_netup_widget ..'">${'.. config['device_wireless'] ..' up_kb}</span>', 3)
-    table.insert(widgets, dspacer) 
-    table.insert(widgets, wifiicon) 
-    table.insert(widgets, neticon) 
-    table.insert(widgets, netfiwidget) 
-    table.insert(widgets, neticonup) 
+    table.insert(widgets, dspacer)
+    table.insert(widgets, wifiicon)
+    table.insert(widgets, neticon)
+    table.insert(widgets, netfiwidget)
+    table.insert(widgets, neticonup)
 end
-    
-        
+
+
 if config['vicious_net'] then
     if not config['device_wired'] then
         config['device_wired'] = 'eth0'
-    end 
-    
+    end
+
     ethericon = wibox.widget.imagebox()
     ethericon:set_image(beautiful.widget_rss)
     neticon = wibox.widget.imagebox()
@@ -342,19 +349,19 @@ if config['vicious_net'] then
     neticonup:set_image(beautiful.widget_netup)
     netwidget = wibox.widget.textbox()
     --vicious.enable_caching(vicious.widgets.net)
-    
+
     vicious.register(netwidget, vicious.widgets.net, '<span color="'
         .. beautiful.fg_netdn_widget ..'">${'.. config['device_wired'] ..' down_kb}</span> <span color="'
         .. beautiful.fg_netup_widget ..'">${'.. config['device_wired'] ..' up_kb}</span>', 3)
-    table.insert(widgets,dspacer) 
-    table.insert(widgets,ethericon) 
-    table.insert(widgets,neticon) 
-    table.insert(widgets,netwidget) 
-    table.insert(widgets,neticonup) 
+    table.insert(widgets,dspacer)
+    table.insert(widgets,ethericon)
+    table.insert(widgets,neticon)
+    table.insert(widgets,netwidget)
+    table.insert(widgets,neticonup)
 end
 -- }}}
 
--- {{{ Bashets 
+-- {{{ Bashets
 if config['bashets'] then
     --    require('lib/bashets')
 end
@@ -431,7 +438,7 @@ mytasklist.buttons = awful.util.table.join(
 for s = 1, screen.count() do
     -- Create a promptbox for each screen
     mypromptbox[s] = awful.widget.prompt()
-    
+
     -- Create an imagebox widget which will contains an icon indicating which layout we're using.
     -- We need one layoutbox per screen.
     mylayoutbox[s] = awful.widget.layoutbox(s)
@@ -440,7 +447,7 @@ for s = 1, screen.count() do
                            awful.button({ }, 3, function () awful.layout.inc(layouts, -1) end),
                            awful.button({ }, 4, function () awful.layout.inc(layouts, 1) end),
                            awful.button({ }, 5, function () awful.layout.inc(layouts, -1) end)))
-    
+
     -- Create a taglist widget
     mytaglist[s] = awful.widget.taglist(s, awful.widget.taglist.filter.all, mytaglist.buttons)
 
@@ -455,10 +462,10 @@ for s = 1, screen.count() do
     left_layout:add(mylauncher)
     left_layout:add(mytaglist[s])
     left_layout:add(mypromptbox[s])
-    
+
     -- Widgets that are aligned to the right
     local right_layout = wibox.layout.fixed.horizontal()
-   
+
     if s == config['main_screen'] then
         if config['debug'] == true then right_layout:add(debugbox) end
         table.insert(widgets, spacer)
@@ -467,14 +474,14 @@ for s = 1, screen.count() do
         if config['systray_align'] == 'right' then
             clockicon = wibox.widget.imagebox()
             clockicon:set_image(beautiful.widget_date)
-            right_layout:add(spacer) 
-            right_layout:add(clockicon) 
+            right_layout:add(spacer)
+            right_layout:add(clockicon)
         end
-        right_layout:add(textclock) 
-        if config['systray_align'] == 'right' then 
-            right_layout:add(wibox.widget.systray()) 
+        right_layout:add(textclock)
+        if config['systray_align'] == 'right' then
+            right_layout:add(wibox.widget.systray())
         end
-    end 
+    end
     right_layout:add(mylayoutbox[s])
 
     -- Now bring it all together (with the tasklist in the middle)
@@ -488,7 +495,7 @@ for s = 1, screen.count() do
     layout:set_right(right_layout)
 
     mywibox[s]:set_widget(layout)
-    
+
     if config['taskbar'] == 'bottom' then
         mytaskbox[s] = awful.wibox({ position = "bottom", screen = s })
         mytaskbox[s]:set_widget(mytasklist[s])
@@ -533,7 +540,7 @@ globalkeys = awful.util.table.join(
             awful.client.focus.byidx( 1)
             if client.focus then client.focus:raise() end
         end),
-    
+
     -- Quit/Restart/Redraw Awesome
     awful.key({ modkey, "Control" }, "r", awesome.restart),
     awful.key({ modkey, "Control" }, "q", awesome.quit),
@@ -554,16 +561,16 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey }, "Return", function () awful.util.spawn(terminal) end),
     awful.key({ modkey }, "r", config['obvious_exec'] and obvious.popup_run_prompt.run_prompt or function () mypromptbox[mouse.screen]:run() end),
     awful.key({ modkey }, "e", config['obvious_exec'] and obvious.popup_run_prompt.run_prompt or function () mypromptbox[mouse.screen]:run() end),
-    
-    awful.key({ modkey }, "s", config['obvious_ssh'] == true and obvious.popup_ssh_prompt.run_prompt or  
+
+    awful.key({ modkey }, "s", config['obvious_ssh'] == true and obvious.popup_ssh_prompt.run_prompt or
             function ()
                 awful.prompt.run({ prompt = "SSH: " },
                 mypromptbox[mouse.screen].widget,
                 function (s)
                     awful.util.spawn(terminal_exec .. ssh_cmd .. space .. s)
                 end)
-            end), 
-        
+            end),
+
     awful.key({ modkey, "Shift" }, "s",
             function ()
                 awful.prompt.run({ prompt = "SSH -X: " },
@@ -571,12 +578,12 @@ globalkeys = awful.util.table.join(
                 function (s)
                     awful.util.spawn(terminal_exec .. ssh_cmd .. " -X " .. s)
                 end)
-            end), 
-    
+            end),
+
     -- screen lock
     awful.key({ modkey }, "F11", function () awful.util.spawn(screen_lock) end),
     awful.key({ modkey }, "F12", function () awful.util.spawn(screen_lock) end),
-    
+
     -- kbdcfg
     awful.key({ modkey }, "F9", config['kbdcfg'] and function () kbdcfg.switch() end),
 
@@ -587,7 +594,7 @@ globalkeys = awful.util.table.join(
                   awful.util.eval, nil,
                   awful.util.getdir("cache") .. "/history_eval")
               end),
-    
+
     -- Menubar
     awful.key({ modkey }, "p", function() menubar.show() end)
 )
@@ -695,7 +702,7 @@ joinTables(awful.rules.rules,{
 -- {{{ Signals
 -- Signal function to execute when a new client appears.
 client.connect_signal("manage", function (c, startup)
-    
+
     if c.pid == 0 then
         -- local fpid = io.popen("pgrep -u " .. os.getenv("USER") .. " -n " .. c.instance)
         local fpid = io.popen("pgrep -n " .. c.instance)
@@ -711,17 +718,17 @@ client.connect_signal("manage", function (c, startup)
     end
 
     if application_config[pid] ~= nil then
-        
+
         if application_config[pid]['screen'] ~= nil and application_config[pid]['screen'] <= screen.count() then
             c.screen = application_config[pid]['screen']
         end
-        
+
         if application_config[pid]['tag'] ~= nil then
             c:tags({ screen[c.screen]:tags()[application_config[pid]['tag']] })
         end
-    
+
     end
-    
+
     -- Enable sloppy focus
     c:connect_signal("mouse::enter", function(c)
         if awful.layout.get(c.screen) ~= awful.layout.suit.magnifier
@@ -747,7 +754,7 @@ client.connect_signal("manage", function (c, startup)
     else
         local titlebars_enabled = false
     end
-    
+
     if titlebars_enabled and (c.type == "normal" or c.type == "dialog") then
         -- Widgets that are aligned to the left
         local left_layout = wibox.layout.fixed.horizontal()
@@ -784,7 +791,7 @@ client.connect_signal("manage", function (c, startup)
 
         awful.titlebar(c):set_widget(layout)
     end
-    
+
     c.size_hints_honor = false
 end)
 
