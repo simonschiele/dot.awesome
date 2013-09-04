@@ -49,20 +49,43 @@ end
 -- {{{ Set Theme
 if not config['theme'] then
     config['theme'] = "default"
-    theme = config_dir .. '/themes-fallback/' .. config['theme'] .. '/theme.lua'
-elseif config['theme'] == 'default' or config['theme'] == 'zenburn' then
+end
+
+if config['theme'] == 'default' or config['theme'] == 'zenburn' then
     theme = config_dir .. '/themes-fallback/' .. config['theme'] .. '/theme.lua'
 else
     theme = config_dir .. '/themes/' .. config['theme'] .. '/theme.lua'
 end
-
+ 
 if not exists(theme) and exists("/usr/share/awesome/themes/default/theme.lua") then
     theme = "/usr/share/awesome/themes/default/theme.lua"
 elseif not exists(theme) and exists("/usr/local/share/awesome/themes/default/theme.lua") then
     theme = "/usr/local/share/awesome/themes/default/theme.lua"
 end
 
+local widget_icons = {}
+widget_icons.widget_cpu    = os.getenv("HOME") .. "/.config/awesome/themes-fallback/default/icons/cpu.png"
+widget_icons.widget_bat    = os.getenv("HOME") .. "/.config/awesome/themes-fallback/default/icons/bat.png"
+widget_icons.widget_mem    = os.getenv("HOME") .. "/.config/awesome/themes-fallback/default/icons/mem.png"
+widget_icons.widget_fs     = os.getenv("HOME") .. "/.config/awesome/themes-fallback/default/icons/disk.png"
+widget_icons.widget_net    = os.getenv("HOME") .. "/.config/awesome/themes-fallback/default/icons/down.png"
+widget_icons.widget_netup  = os.getenv("HOME") .. "/.config/awesome/themes-fallback/default/icons/up.png"
+widget_icons.widget_mail   = os.getenv("HOME") .. "/.config/awesome/themes-fallback/default/icons/mail.png"
+widget_icons.widget_vol    = os.getenv("HOME") .. "/.config/awesome/themes-fallback/default/icons/vol.png"
+widget_icons.widget_org    = os.getenv("HOME") .. "/.config/awesome/themes-fallback/default/icons/cal.png"
+widget_icons.widget_date   = os.getenv("HOME") .. "/.config/awesome/themes-fallback/default/icons/time.png"
+widget_icons.widget_crypto = os.getenv("HOME") .. "/.config/awesome/themes-fallback/default/icons/crypto.png"
+widget_icons.widget_wifi   = os.getenv("HOME") .. "/.config/awesome/themes-fallback/default/icons/wifi.png"
+widget_icons.widget_rss    = os.getenv("HOME") .. "/.config/awesome/themes-fallback/default/icons/rss.png"
+
+saveconfig = config
 beautiful.init(theme)
+for key,val in pairs(widget_icons) do
+    if not beautiful[key] ~= nil then
+        beautiful[key] = val
+    end
+end
+config = saveconfig
 -- }}}
 
 -- {{{ Layouts
