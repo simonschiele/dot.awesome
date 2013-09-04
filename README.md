@@ -3,29 +3,22 @@
 
 This is my little awesome config. I tried to wrap a few of the most common awesome features into a simple config file.
 
-If you want to use it regulary and be able to update from repo, create your own myconfig.lua (by copying myconfig.lua-example) and maybe you want to put applications.lua in gitignore.
+If you want to use it regulary and be able to update this config, create your own myconfig.lua and myapplications.lua (by copying myconfig.lua-example and applications.lua).
 
-you are very welcome to use and improve this config set. send patches, improvements or ideas to <simon.codingmonkey@googlemail.com>.
-
+you are very welcome to use and improve this config set. send patches, improvements or ideas to [<simon.codingmonkey@googlemail.com>](mailto:simon.codingmonkey@googlemail.com "mailto:simon.codingmonkey@googlemail.com").
 
 ## Available clone paths:
- * git://simon.psaux.de/git/awesome.git
- * http://simon.psaux.de/git/awesome.git
- * ssh://git@simon.psaux.de/awesome.git (send public key via email for write access)
-
-Also on github:
- * https://github.com/simonschiele/awesome.git
-
+    * [https://github.com/simonschiele/awesome.git](https://github.com/simonschiele/awesome.git "view repo on github")
+    * [http://simon.psaux.de/git/awesome.git](http://simon.psaux.de/git/awesome.git "view repo on simons cgit")
+    * ssh://git@simon.psaux.de/awesome.git (send public key via [email](mailto:simon.codingmonkey@googlemail.com "mailto:simon.codingmonkey@googlemail.com") for write access)
 
 ## Versions / Branches
 There are two active branches:
 
- * master (for awesome 3.4)
-    Use this one for debian, ubuntu, ...
-
- * v3.5 (for awesome 3.5)
-    Use this one for awesome from git, arch, ...
-
+    * [master](https://github.com/simonschiele/awesome "master branch on github") (for awesome 3.4)
+      Use this one for debian, ubuntu, ...
+    * [v3.5](https://github.com/simonschiele/awesome/tree/v3.5 "v3.5 branch on github") (for awesome 3.5) 
+      Use this one for awesome from git, arch, debian experimental,...
 
 ## Included subrepos:
  * lib/obvious (http://git.mercenariesguild.net/?p=obvious.git;a=summary)
@@ -56,8 +49,7 @@ There are two active branches:
     cp myconfig.lua-example myconfig.lua
     vim myconfig.lua
 
-
-## My Default Keysetting:
+## This Configs Default Keysetting:
 
     # "Windows" (aka clients)
     Mouse Btn 1 + Win/Alt       - Move window
@@ -73,7 +65,7 @@ There are two active branches:
     Win + Shift + x             - xkill
     Win + o                     - Move window to next screen
 
-    # Screens and "Workspaces" (aka Tags) 
+    # Screens and "Workspaces" (aka Tags)
     Win + ( Shift + ) Space     - next/(last) layout
     Win + Shift + h/l           - Switch "sublayout" of layout
     Win + 1-9                   - Switch to Tag 1-9
@@ -98,12 +90,11 @@ There are two active branches:
     Win + Control + r           - restart awesome
     Win + Control + q           - quit awesome (back to dm/shell)
 
-
 ## Authors
 
 **Simon Schiele**
 
- * http://simon.psaux.de/
- * mailto:<simon.codingmonkey@googlemail.com>
+ * [http://simon.psaux.de/](http://simon.psaux.de/)
+ * mailto:[<simon.codingmonkey@googlemail.com>](mailto:simon.codingmonkey@googlemail.com "mailto:simon.codingmonkey@googlemail.com").
 
 

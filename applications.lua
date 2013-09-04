@@ -1,3 +1,8 @@
+--
+-- DON'T EDIT THIS FILE! Copy it to '~/.config/awesome/myapplications.lua'
+-- and edit this copy. This way the config will be update-safe.
+--
+
 -- Applications
 terminal = "gnome-terminal.wrapper --disable-factory"
 terminal_exec = terminal .. " -e "

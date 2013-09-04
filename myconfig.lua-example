@@ -1,3 +1,7 @@
+--
+-- DON'T EDIT THIS FILE! Copy it to '~/.config/awesome/myconfig.lua' and edit
+-- this copy. This way the config will be update-safe.
+--
 
 --- Modkey is your main modifier key. you get ~50 keybindings.
 --- it's wise to use the window(s) (Mod4) key for most stuff
