@@ -469,7 +469,7 @@ for s = 1, screen.count() do
     if s == config['main_screen'] then
         if config['debug'] == true then right_layout:add(debugbox) end
         table.insert(widgets, spacer)
-        table.foreach(widgets, function(k,v) right_layout:add(v) end)
+        for k,v in pairs(widgets) do right_layout:add(v) end
         if not config['systray_align'] or config['systray_align'] == 'left' then right_layout:add(wibox.widget.systray()) end
         if config['systray_align'] == 'right' then
             clockicon = wibox.widget.imagebox()
