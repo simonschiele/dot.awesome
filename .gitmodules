@@ -1,9 +1,6 @@
 [submodule "lib/vicious"]
 	path = lib/vicious
 	url = http://git.sysphere.org/vicious
-[submodule "lib/obvious"]
-	path = lib/obvious
-	url = git://git.mercenariesguild.net/obvious.git
 [submodule "lib/flaw"]
 	path = lib/flaw
 	url = https://github.com/dsoulayrol/flaw.git
