@@ -13,3 +13,6 @@
 [submodule "themes"]
 	path = themes
 	url = https://github.com/mikar/awesome-themes.git
+[submodule "themes-fallback/solarized"]
+	path = themes-fallback/solarized
+	url = https://github.com/cycojesus/awesome-solarized.git
