@@ -16,3 +16,6 @@
 [submodule "themes-fallback/solarized"]
 	path = themes-fallback/solarized
 	url = https://github.com/cycojesus/awesome-solarized.git
+[submodule "lib/awesompd"]
+	path = lib/awesompd
+	url = https://github.com/alexander-yakushev/awesompd.git
