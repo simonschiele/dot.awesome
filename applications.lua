@@ -20,6 +20,7 @@ browser = "google-chrome"
 mailer = "icedove"
 filer = "thunar"
 sysconfig = "gnome-control-center"
+sysmonitor = "gnome-system-monitor"
 mixer = "pavucontrol"
 
 -- Menu
