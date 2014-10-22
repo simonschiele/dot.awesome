@@ -19,3 +19,6 @@
 [submodule "lib/awesompd"]
 	path = lib/awesompd
 	url = https://github.com/alexander-yakushev/awesompd.git
+[submodule "lib/themes-solarized"]
+	path = lib/themes-solarized
+	url = https://github.com/cycojesus/awesome-solarized
