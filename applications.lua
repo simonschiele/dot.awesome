@@ -4,7 +4,7 @@
 --
 
 -- Applications
-terminal = "gnome-terminal.wrapper --disable-factory"
+terminal = "terminator"
 terminal_exec = terminal .. " -e "
 
 editor = "vim"
@@ -18,9 +18,12 @@ ssh_cmd = "ssh -v"
 screen_lock = "xscreensaver-command --lock"
 browser = "google-chrome"
 mailer = "icedove"
-filer = "thunar"
-sysconfig = "gnome-control-center"
-sysmonitor = "gnome-system-monitor"
+filer = "nautilus"
+map = 'gnome-maps'
+sysconfig = 'gnome-control-center'
+sysmonitor = 'gksudo --preserve-env gnome-system-monitor'
+systemdlogs = 'gksudo --preserve-env gnome-logs' 
+musicplayer = 'gmpc'
 mixer = "pavucontrol"
 
 -- Menu
