@@ -489,7 +489,7 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact( 0.05)    end),
     awful.key({ modkey,           }, "h",     function () awful.tag.incmwfact(-0.05)    end),
     awful.key({ modkey, "Shift"   }, "h",     function () awful.tag.incnmaster( 1)      end),
-    awful.key({ modkey, "Shift"   }, "l",     function () awful.tag.incnmaster(-1)      end),
+    -- awful.key({ modkey, "Shift"   }, "l",     function () awful.tag.incnmaster(-1)      end),
     awful.key({ modkey, "Control" }, "h",     function () awful.tag.incncol( 1)         end),
     awful.key({ modkey, "Control" }, "l",     function () awful.tag.incncol(-1)         end),
     awful.key({ modkey,           }, "space", function () awful.layout.inc(layouts,  1) end),
@@ -499,6 +499,14 @@ globalkeys = awful.util.table.join(
     
     -- Prompt / Exec Applications
     awful.key({ modkey }, "Return", function () awful.util.spawn(terminal) end),
+    awful.key({ modkey, "Shift" }, "Return", function () awful.util.spawn(filer) end),
+    awful.key({ modkey, "Shift" }, "w", function () awful.util.spawn(os.getenv("HOME") .. "/.bin/set_wallpaper.sh") end),
+    awful.key({ modkey, "Shift" }, "m", function () awful.util.spawn(map) end),
+    awful.key({ modkey, "Shift" }, "g", function () awful.util.spawn(musicplayer) end),
+    awful.key({ modkey, "Shift" }, "p", function () awful.util.spawn(sysmonitor) end),
+    awful.key({ modkey, "Shift" }, "l", function () awful.util.spawn(os.getenv("HOME") .. "/.bin/gnome-system-log.wrapper") end),
+    awful.key({ modkey, "Control", "Shift" }, "l", function () awful.util.spawn("gksudo --preserve-env gnome-logs") end),
+    awful.key({ modkey }, "p", function () awful.util.spawn(sysmonitor) end),
     awful.key({ modkey }, "r", config['obvious_exec'] and obvious.popup_run_prompt.run_prompt or function () mypromptbox[mouse.screen]:run() end),
     awful.key({ modkey }, "e", config['obvious_exec'] and obvious.popup_run_prompt.run_prompt or function () mypromptbox[mouse.screen]:run() end),
     
