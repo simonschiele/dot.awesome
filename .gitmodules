@@ -1,18 +1,15 @@
 [submodule "lib/vicious"]
-	path = lib/vicious
-	url = http://git.sysphere.org/vicious
+    path = lib/vicious
+    url = http://git.sysphere.org/vicious
 [submodule "lib/obvious"]
-	path = lib/obvious
-	url = git://git.mercenariesguild.net/obvious.git
+    path = lib/obvious
+    url = git://git.mercenariesguild.net/obvious.git
 [submodule "lib/flaw"]
-	path = lib/flaw
-	url = https://github.com/dsoulayrol/flaw.git
-[submodule "lib/bashets"]
-	path = lib/bashets
-	url = git://gitorious.org/bashets/bashets.git
+    path = lib/flaw
+    url = https://github.com/dsoulayrol/flaw.git
 [submodule "lib/blingbling"]
-	path = lib/blingbling
-	url = git://github.com/cedlemo/blingbling.git
+    path = lib/blingbling
+    url = https://github.com/cedlemo/blingbling.git
 [submodule "themes"]
-	path = themes
-	url = https://github.com/Morley93/awesome-themes-3.5
+    path = themes
+    url = https://github.com/Morley93/awesome-themes-3.5
