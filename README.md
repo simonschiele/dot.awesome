@@ -1,11 +1,20 @@
-
 # Simons awesome awesome config (-:
+> awesome!
 
-This is my little awesome config. I tried to wrap a few of the most common awesome features into a simple config file.
+This is my little awesome config. I tried to wrap a few of the most common
+awesome features into a simple config file. If you want to use it regulary
+and be able to update from repo, create your own myconfig.lua (by copying
+myconfig.lua-example) and maybe you want to put applications.lua in gitignore.
 
-If you want to use it regulary and be able to update this config, create your own myconfig.lua and myapplications.lua (by copying myconfig.lua-example and applications.lua).
+you are very welcome to use and improve this config set. send patches,
+improvements or ideas to <simon.codingmonkey@gmail.com>.
 
-you are very welcome to use and improve this config set. send patches, improvements or ideas to [<simon.codingmonkey@googlemail.com>](mailto:simon.codingmonkey@googlemail.com "mailto:simon.codingmonkey@googlemail.com").
+
+## Deprication warning
+I switched to i3, so I don't see when something is broken in the recent
+awesome Versions. Feel free to write a mail or open up a Ticker if you
+experince any troubles with this config.
+
 
 ## Available clone paths:
  * [https://github.com/simonschiele/awesome.git](https://github.com/simonschiele/awesome.git "view repo on github")
@@ -29,25 +38,27 @@ There are two active branches:
 * themes/ (https://github.com/mikar/awesome-themes.git)
 
 ## Usage / Setup:
-    
-    # Go in your config dir and move away old awesome-config:
-    cd ~/.config/
-    mv awesome/ awesome-old/
-    
-    # Clone Repo for awesome 3.4 (see 'clone paths' above):
-    git clone <clone-path> awesome/
-    
-    # If you want config for awesome 3.5, checkout branch v3.5 instead:
-    git clone -b v3.5 <clone-path> awesome/
-    
-    # Checkout the submodules
-    cd awesome/
-    git submodule init
-    git submodule update
-    
-    # Make a copy of myconfig.lua and edit to your needs:
-    cp myconfig.lua-example myconfig.lua
-    vim myconfig.lua
+
+```
+# Go in your config dir and move away old awesome-config:
+$> cd ~/.config/
+$> mv awesome/ awesome-old/
+
+# Clone Repo for awesome 3.4 (see 'clone paths' above):
+$> git clone <clone-path> awesome/
+
+# If you want config for awesome 3.5, checkout branch v3.5 instead:
+$> git clone -b v3.5 <clone-path> awesome/
+
+# Checkout the submodules
+$> cd awesome/
+$> git submodule init
+$> git submodule update
+
+# Make a copy of myconfig.lua and edit to your needs:
+$> cp myconfig.lua-example myconfig.lua
+$> vim myconfig.lua
+```
 
 ## This Configs Default Keysetting:
 
@@ -94,7 +105,5 @@ There are two active branches:
 
 **Simon Schiele**
 
- * [http://simon.psaux.de/](http://simon.psaux.de/)
- * mailto:[<simon.codingmonkey@googlemail.com>](mailto:simon.codingmonkey@googlemail.com "mailto:simon.codingmonkey@googlemail.com").
-
-
+ * http://simon.psaux.de/
+ * mailto:<simon.codingmonkey@gmail.com>
